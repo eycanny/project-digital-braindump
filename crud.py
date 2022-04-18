@@ -12,13 +12,19 @@ def create_user(email, password):
     return user
 
 
+def get_user_by_email(email):
+    """Return a user by email."""
+
+    return User.query.filter(User.email == email).first()
+
+
 # 2.0
 # def create_user(email, password, username):
 #     """Create and return a new user."""
-
 #     user = User(email=email, password=password, username=username)
-
 #     return user
+
+
 
 def create_note(date_created, title = None, body = None, date_modified = None):
     """Create and return a new note."""
