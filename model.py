@@ -21,6 +21,9 @@ class User(db.Model):
 
     notes = db.relationship("Note", back_populates="user")
 
+    def __repr__(self):
+        return f"<User user_id={self.user_id} email={self.email}>"
+
 
 class Note(db.Model):
     """A note."""
@@ -36,6 +39,9 @@ class Note(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
 
     user = db.relationship("User", back_populates="notes")
+
+    def __repr__(self):
+        return f"<Note note_id={self.user_id}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///notes", echo=True):
