@@ -20,7 +20,7 @@ def create_user(email, password):
 
 #     return user
 
-def create_note(title = None, body = None, date_created, date_modified = None):
+def create_note(date_created, title = None, body = None, date_modified = None):
     """Create and return a new note."""
 
     note = Note(title = title, 
