@@ -1,0 +1,5 @@
+env
+brainstorm
+__pycache__
+*.pyc
+*.sh
