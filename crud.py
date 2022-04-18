@@ -43,3 +43,23 @@ def modify_note(note):
     note.date_modified = date_modified
 
     return note
+
+
+def delete_note(note):
+    """Delete a note."""
+
+    #User clicks on delete button
+    #Alert box pops up
+    #User confirms or denies proceeding with delete
+
+
+def get_note_by_keyword(keyword):
+    """Return notes containing keyword."""
+
+    return Note.query.filter((Note.title.like(f"%{keyword}%")) | (Note.body.like(f"%{keyword}%"))).all()
+
+
+if __name__ == "__main__":
+    from server import app
+
+    connect_to_db(app)
