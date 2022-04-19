@@ -19,5 +19,11 @@ for n in range(10):
 
     user = crud.create_user(email, password)
     model.db.session.add(user)
+    model.db.session.commit()
+    
+    for i in range(5):
+
+        note = crud.create_note(user, body = f"Note test{i}")
+        model.db.session.add(note)
 
 model.db.session.commit()
