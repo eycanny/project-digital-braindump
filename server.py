@@ -21,7 +21,9 @@ def homepage():
 
 @app.route("/login", methods = ["POST"])
 def process_login():
-    """Process user login."""
+    """Process user login.
+    
+    If login successful, redirect to user's notes."""
 
     email = request.form.get("email")
     password = request.form.get("password")
@@ -32,7 +34,7 @@ def process_login():
         return redirect("/")
     else:
         session["user_email"] = user.email
-        return redirect("/notes/<int: user_id>")
+        return redirect(f"/notes/{user.user_id}")
 
 
 if __name__ == "__main__":
