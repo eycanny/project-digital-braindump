@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{user.email}}'s Notes{% endblock %}
+
+{% block body %}
+  {% for note in notes %}
+    <div>
+      {% if note.title %}
+        <h2>{{ note.title }}</h2>
+      {% endif %}
+
+      {% if note.body %}
+        <p>{{ note.body }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}
