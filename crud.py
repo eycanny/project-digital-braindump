@@ -25,7 +25,6 @@ def get_user_by_email(email):
 #     return user
 
 
-
 def create_note(date_created, title = None, body = None, date_modified = None):
     """Create and return a new note."""
 
@@ -35,6 +34,7 @@ def create_note(date_created, title = None, body = None, date_modified = None):
                 date_modified = date_modified)
 
     return note
+
 
 def modify_note(note):
     """Modify a note."""
@@ -57,6 +57,12 @@ def delete_note(note):
     #User clicks on delete button
     #Alert box pops up
     #User confirms or denies proceeding with delete
+
+
+def get_note_by_user(user_id):
+    """Return notes by user id."""
+
+    return Note.query.filter(Note.user_id == user_id).all()
 
 
 def get_note_by_keyword(keyword):
