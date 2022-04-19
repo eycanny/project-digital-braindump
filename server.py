@@ -13,8 +13,13 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route("/")
-def homepage():
+def display_homepage():
     """View homepage."""
+
+    user = crud.get_user_by_email(email)
+
+    if user:
+        return redirect(f"/notes/{user.user_id}")
 
     return render_template("homepage.html")
 
@@ -36,6 +41,14 @@ def process_login():
         session["user_email"] = user.email
         return redirect(f"/notes/{user.user_id}")
 
+
+@app.route("/notes/<int:user_id>")
+def show_notes(user_id):
+    """Show user's notes."""
+
+    notes = crud.get_note_by_user(user_id)
+
+    return render_template("user_notes.html", notes=notes)
 
 if __name__ == "__main__":
     connect_to_db(app)
