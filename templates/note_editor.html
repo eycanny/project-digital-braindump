@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Edit Note{% endblock %}
+
+{% block body %}
+    <form action="/create-note" method="POST">
+    <p>
+        Title <input type='text' name="title">
+    </p>
+    <p>
+        Body <textarea type="text" name="body"></textarea>
+    </p>
+    <p>
+        <input type="submit" value="Create Note">
+    </p>
+    </form>
+{% endblock %}
