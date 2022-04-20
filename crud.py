@@ -18,6 +18,12 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
+def get_user_by_id(user_id):
+    """Return a user by user id."""
+
+    return User.query.filter(User.user_id == user_id).first()
+
+
 # 2.0
 # def create_user(email, password, username):
 #     """Create and return a new user."""
@@ -25,13 +31,26 @@ def get_user_by_email(email):
 #     return user
 
 
-def create_note(date_created, title = None, body = None, date_modified = None):
+# def create_note(date_created, title = None, body = None, date_modified = None):
+#     """Create and return a new note."""
+
+#     note = Note(title = title, 
+#                 body = body, 
+#                 date_created = date_created, 
+#                 date_modified = date_modified)
+
+#     return note
+
+def create_note(user, title = None, body = None):
     """Create and return a new note."""
 
-    note = Note(title = title, 
-                body = body, 
-                date_created = date_created, 
-                date_modified = date_modified)
+    note = Note(
+        title = title, 
+        body = body, 
+        date_created = datetime.now().strftime("%m-%d-%Y %H:%M:%S"), 
+        date_modified = None,
+        user_id = user.user_id
+    )
 
     return note
 
@@ -65,10 +84,13 @@ def get_note_by_user(user_id):
     return Note.query.filter(Note.user_id == user_id).all()
 
 
-def get_note_by_keyword(keyword):
+def get_note_by_keyword(keyword, user_id):
     """Return notes containing keyword."""
 
-    return Note.query.filter((Note.title.like(f"%{keyword}%")) | (Note.body.like(f"%{keyword}%"))).all()
+    return Note.query.filter(
+        (Note.title.like(f"%{keyword}%")) | (Note.body.like(f"%{keyword}%")),
+        Note.user_id == user_id
+        ).all()
 
 
 if __name__ == "__main__":
