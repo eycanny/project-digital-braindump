@@ -31,16 +31,6 @@ def get_user_by_id(user_id):
 #     return user
 
 
-# def create_note(date_created, title = None, body = None, date_modified = None):
-#     """Create and return a new note."""
-
-#     note = Note(title = title, 
-#                 body = body, 
-#                 date_created = date_created, 
-#                 date_modified = date_modified)
-
-#     return note
-
 def create_note(user, title = None, body = None):
     """Create and return a new note."""
 
