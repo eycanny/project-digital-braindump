@@ -13,13 +13,14 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route("/")
-def display_homepage():
+def view_homepage():
     """View homepage."""
 
-    user = crud.get_user_by_email(email)
+    user_email = session.get("user_email")
+    user = crud.get_user_by_email(user_email)
 
     if user:
-        return redirect(f"/notes/{user.user_id}")
+        return redirect(f"/{user.user_id}/notes")
 
     return render_template("homepage.html")
 
@@ -39,16 +40,51 @@ def process_login():
         return redirect("/")
     else:
         session["user_email"] = user.email
-        return redirect(f"/notes/{user.user_id}")
+        return redirect(f"/{user.user_id}/notes")
 
 
-@app.route("/notes/<int:user_id>")
-def show_notes(user_id):
-    """Show user's notes."""
+@app.route("/create-note")
+def open_note_editor():
+    """Open note editor."""
 
+    return render_template("note_editor.html")
+
+
+@app.route("/create-note", methods=["POST"])
+def create_note():
+    """Create a note."""
+
+    title = request.form.get("title")
+    body = request.form.get("body")
+    user = crud.get_user_by_email(session["user_email"])
+
+    new_note = crud.create_note(user, title, body)
+    db.session.add(new_note)
+    db.session.commit()
+
+    return redirect(f"/{user.user_id}/notes")
+
+@app.route("/<user_id>/notes")
+def view_notes(user_id):
+    """Show notes of user."""
+
+    user = crud.get_user_by_id(user_id)
     notes = crud.get_note_by_user(user_id)
 
-    return render_template("user_notes.html", notes=notes)
+    return render_template("user_notes.html", notes=notes, user=user)
+
+
+@app.route("/search")
+def view_notes_by_keyword():
+    """Return notes with keyword input by user."""
+
+    keyword = request.args.get("search")
+    user = crud.get_user_by_email(session["user_email"])
+
+    notes = crud.get_note_by_keyword(keyword, user.user_id)
+
+    return render_template("user_notes.html", notes=notes, user=user)
+
 
 if __name__ == "__main__":
     connect_to_db(app)
