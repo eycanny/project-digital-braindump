@@ -2,6 +2,13 @@
 {% block title %}{{user.email}}'s Notes{% endblock %}
 
 {% block body %}
+  <form action="/search" id="search">
+    <input type="text" name="search">
+    <input type="submit" value="Search for Keyword">
+  </form>
+  <form action="/create-note" id="create">
+    <input type="submit" value="Create a New Note">
+  </form>
   {% for note in notes %}
     <div>
       {% if note.title %}
