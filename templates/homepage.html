@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}Digital Braindump Home{% endblock %}
 
-{% block body %}
+{% block before_quote %}
   <h1>Welcome to your Digital Braindump!</h1>
-  <p>See your notes by logging in.</p>
+{% endblock %}
 
-  <h2>Log In</h2>
-  <form action="/login" method="POST">
-    <p>
-      Email <input type="text" name="email">
-    </p>
+{% block body %}
+  <div class="login-form">
+    <h2>Log In</h2>
+    <form action="/login" method="POST">
+      <p>
+        <label for="name">Email</label>
+        <input type="text" name="email">
+      </p>
 
-    <p>
-      Password <input type="password" name="password">
-    </p>
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+      </p>
 
-    <p>
-      <input type="submit">
-    </p>
-  </form>
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+  </div>
 {% endblock %}
