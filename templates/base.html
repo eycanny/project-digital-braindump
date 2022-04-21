@@ -7,6 +7,10 @@
       {% block title %}{% endblock %}
     </title>
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js" crossorigin></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script> -->
+
     {% block head %}{% endblock %}
   </head>
   <body>
@@ -16,8 +20,16 @@
       </p>
     {% endfor %}
 
+    {% block before_body %}{% endblock %}
+      <div class="quote"><h2>Quote of the Day</h2></div>
+      <div class="quote" id="affirmation"></div>
     {% block body %}{% endblock %}
 
     {% block after_body %}{% endblock %}
+    {% block js %}{% endblock %}
+    <script src="/static/js/inspiration.js"></script>
+    <div>
+      Quotes provided by <a href="https://quotes.rest/" target="_blank">They Said So</a>
+    </div>
   </body>
 </html>
