@@ -12,4 +12,8 @@
     <h3>Body</h3>
     <p>{{ note.body }}</p>
 </section>
+
+<form action="/{{note.user_id}}/notes">
+    <input type="submit" value="RETURN TO NOTES">
+</form>
 {% endblock %}
