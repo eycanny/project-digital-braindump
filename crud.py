@@ -74,6 +74,12 @@ def get_note_by_user(user_id):
     return Note.query.filter(Note.user_id == user_id).all()
 
 
+def get_note_by_id(note_id, user_id):
+    """Return a note by note id based on user id."""
+
+    return Note.query.filter(Note.user_id == user_id, Note.note_id == note_id).first()
+
+
 def get_note_by_keyword(keyword, user_id):
     """Return notes containing keyword."""
 
