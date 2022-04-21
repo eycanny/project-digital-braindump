@@ -78,6 +78,15 @@ def view_notes(user_id):
     return render_template("user_notes.html", notes=notes, user=user)
 
 
+@app.route("/<user_id>/notes/<note_id>")
+def view_note(user_id, note_id):
+    """Show a note."""
+
+    note = crud.get_note_by_id(note_id=note_id, user_id=user_id)
+
+    return render_template("note_details.html", note=note)
+    
+
 @app.route("/search")
 def view_notes_by_keyword():
     """Return notes with keyword input by user."""
