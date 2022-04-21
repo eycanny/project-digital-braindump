@@ -1,23 +1,36 @@
 {% extends 'base.html' %}
 {% block title %}Note{% endblock %}
 
-{% block quote %}{% endblock %}
+{% block quote %}
+    <div class="quote">
+        <h2>Quote of the Day</h2>
+            <p id="affirmation"></p>
+    </div>
+{% endblock %}
 {% block body %}
 <section class="title">
     <h3>Title</h3>
-    <p>{{ note.title }}</p>
+        <p>{{ note.title }}</p>
 </section>
 
 <section class="body">
     <h3>Body</h3>
-    <p>{{ note.body }}</p>
+        <p>{{ note.body }}</p>
 </section>
 
-<form action="/notes">
-    <input type="submit" value="RETURN TO NOTES">
-</form>
+<section class="note-options">
+    <form action="/notes">
+        <input type="submit" value="RETURN TO NOTES">
+    </form>
 
-<form action="/notes/{{ note.note_id }}/edit">
-    <input type="submit" value="EDIT NOTE">
-</form>
+    <form action="/notes/{{ note.note_id }}/edit">
+        <input type="submit" value="EDIT NOTE">
+    </form>
+
+    <form action="/delete-note/{{ note.note_id }}" method="POST" id="delete-confirm">
+        <input type="submit" value="DELETE NOTE" id="delete-button">
+    </form>
+</section>
 {% endblock %}
+
+{% block js %}<script src="/static/js/notes.js"></script>{% endblock %}
