@@ -87,9 +87,7 @@ def create_note():
 def view_notes():
     """Show notes of user."""
 
-    if session["user_email"] == None:
-        flash("You must be logged in to view your notes.")
-        return redirect("/")
+    check_user_login()
 
     user = crud.get_user_by_email(session["user_email"])
     notes = crud.get_note_by_user(user.user_id)
@@ -101,6 +99,8 @@ def view_notes():
 def view_note(note_id):
     """Show a note."""
 
+    check_user_login()
+
     user = crud.get_user_by_email(session["user_email"])
     note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
 
@@ -110,6 +110,8 @@ def view_note(note_id):
 @app.route("/search")
 def view_notes_by_keyword():
     """Return notes with keyword input by user."""
+
+    check_user_login()
 
     keyword = request.args.get("search")
     user = crud.get_user_by_email(session["user_email"])
@@ -144,6 +146,19 @@ def edit_note(note_id):
 
     return redirect("/notes")
 
+
+@app.route("/delete-note/<note_id>", methods=["POST"])
+def delete_note(note_id):
+    """Delete a note."""
+
+    user = crud.get_user_by_email(session["user_email"])
+    note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
+
+    db.session.delete(note)
+    db.session.commit()
+
+    flash("Note has been deleted.")
+    return redirect("/notes")
 ##############################################################################
 
 ### Logic Functions ###
@@ -165,6 +180,18 @@ def modify_note(note):
     note.date_modified = date_modified
 
     return note
+
+
+def check_user_login():
+    """Check if user is logged in.
+    
+    Redirect user to homepage if not logged in."""
+
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to view your notes.")
+        return redirect("/")
 
 
 if __name__ == "__main__":
