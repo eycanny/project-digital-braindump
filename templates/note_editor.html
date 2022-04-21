@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Edit Note{% endblock %}
 
+{% block quote %}{% endblock %}
 {% block body %}
+    <h2>Create a Note</h2>
     <form action="/create-note" method="POST">
     <p>
         Title <input type='text' name="title">
@@ -10,7 +12,7 @@
         Body <textarea type="text" name="body"></textarea>
     </p>
     <p>
-        <input type="submit" value="Create Note">
+        <input type="submit" value="Save">
     </p>
     </form>
 {% endblock %}
