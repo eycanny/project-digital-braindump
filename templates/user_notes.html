@@ -2,18 +2,23 @@
 {% block title %}{{user.email}}'s Notes{% endblock %}
 
 {% block body %}
-  <form action="/search" id="search">
-    <input type="text" name="search">
-    <input type="submit" value="Search for Keyword">
-  </form>
-  <form action="/create-note" id="create">
-    <input type="submit" value="Create a New Note">
-  </form>
-  <form action="/logout" id="logout">
-    <input type="submit" value="Logout">
-  </form>
-  {% for note in notes %}
-    <div>
+  <section id="user-options">
+    <form action="/search" id="search-option">
+      <input type="text" name="search">
+      <input type="submit" value="SEARCH KEYWORD" id="search-button">
+    </form>
+    <form action="/create-note" id="create-option">
+      <input type="submit" value="CREATE NEW NOTE" id="create-note-button">
+    </form>
+    <form action="/logout" id="logout-option">
+      <input type="submit" value="LOG OUT" id="logout-button">
+    </form>
+  </section>
+
+  <section id="note-container">
+    {% for note in notes %}
+    <form action="/{{note.user_id}}/notes/{{note.note_id}}" class="note">
+    <button>
       {% if note.title %}
         <h2>{{ note.title }}</h2>
       {% endif %}
@@ -21,6 +26,11 @@
       {% if note.body %}
         <p>{{ note.body }}</p>
       {% endif %}
-    </div>
-  {% endfor %}
+    </button>
+    </form>
+    {% endfor %}
+  </section>
 {% endblock %}
+
+{% block js %}<script src="/static/js/notes.js"></script>{% endblock %} -->
+
