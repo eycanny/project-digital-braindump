@@ -3,16 +3,29 @@
 
 {% block quote %}{% endblock %}
 {% block body %}
+    {% if note_mode == "create" %}
     <h2>Create a Note</h2>
     <form action="/create-note" method="POST">
-    <p>
-        Title <input type='text' name="title">
-    </p>
-    <p>
-        Body <textarea type="text" name="body"></textarea>
-    </p>
-    <p>
-        <input type="submit" value="Save">
-    </p>
+        <p>
+            Title <input type='text' name="title">
+        </p>
+        <p>
+            Body <textarea type="text" name="body"></textarea>
+        </p>
+    {% endif %}
+
+    {% if note_mode == "edit" %}
+    <h2>Edit Note</h2>
+    <form action="/edit-note/{{ note.note_id }}" method="POST">
+        <p>
+            Title <input type='text' name="title" value="{{ note.title }}">
+        </p>
+        <p>
+            Body <textarea type="text" name="body">{{ note.body }}</textarea>
+        </p>
+    {% endif %}
+        <p>
+            <input type="submit" value="Save">
+        </p>
     </form>
 {% endblock %}
