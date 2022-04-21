@@ -16,4 +16,8 @@
 <form action="/notes">
     <input type="submit" value="RETURN TO NOTES">
 </form>
+
+<form action="/notes/{{ note.note_id }}/edit">
+    <input type="submit" value="EDIT NOTE">
+</form>
 {% endblock %}
