@@ -68,6 +68,10 @@ def create_note():
 def view_notes(user_id):
     """Show notes of user."""
 
+    if session["user_email"] == None:
+        flash("You must be logged in to view your notes.")
+        return redirect("/")
+
     user = crud.get_user_by_id(user_id)
     notes = crud.get_note_by_user(user_id)
 
@@ -84,6 +88,16 @@ def view_notes_by_keyword():
     notes = crud.get_note_by_keyword(keyword, user.user_id)
 
     return render_template("user_notes.html", notes=notes, user=user)
+
+
+@app.route("/logout")
+def process_logout():
+    """Process user logout."""
+
+    session["user_email"] = None
+
+    return redirect("/")
+    
 
 
 if __name__ == "__main__":
