@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
+from datetime import datetime
 import crud
 import os
 
@@ -11,7 +12,9 @@ app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 app.jinja_env.undefined = StrictUndefined
 
+##############################################################################
 
+### Homepage, Login/Logout ###
 @app.route("/")
 def view_homepage():
     """View homepage."""
@@ -43,11 +46,24 @@ def process_login():
         return redirect("/notes")
 
 
-@app.route("/create-note")
-def open_note_editor():
-    """Open note editor."""
+@app.route("/logout")
+def process_logout():
+    """Process user logout."""
 
-    return render_template("note_editor.html")
+    session["user_email"] = None
+
+    return redirect("/") 
+
+##############################################################################
+
+### Create Note ###
+@app.route("/create-note")
+def open_editor_to_create():
+    """Open note editor for a new note."""
+
+    note_mode = "create"
+
+    return open_editor(note_mode, note=None)
 
 
 @app.route("/create-note", methods=["POST"])
@@ -64,6 +80,9 @@ def create_note():
 
     return redirect("/notes")
 
+##############################################################################
+
+### View Note ###
 @app.route("/notes")
 def view_notes():
     """Show notes of user."""
@@ -97,17 +116,55 @@ def view_notes_by_keyword():
 
     notes = crud.get_note_by_keyword(keyword, user.user_id)
 
-    return render_template("user_notes.html", notes=notes, user=user)
+    return render_template("user_notes.html", notes=notes, user=user) 
+
+##############################################################################
+
+### Edit Note ###
+@app.route("/notes/<note_id>/edit")
+def open_editor_to_edit(note_id):
+    """Open note editor to edit a note."""
+
+    note_mode = "edit"
+    user = crud.get_user_by_email(session["user_email"])
+    note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
+
+    return open_editor(note_mode, note)
 
 
-@app.route("/logout")
-def process_logout():
-    """Process user logout."""
+@app.route("/edit-note/<note_id>", methods=["POST"])
+def edit_note(note_id):
+    """Edit a note."""
 
-    session["user_email"] = None
+    user = crud.get_user_by_email(session["user_email"])
+    note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
 
-    return redirect("/")
-    
+    note = modify_note(note)
+    db.session.commit()
+
+    return redirect("/notes")
+
+##############################################################################
+
+### Logic Functions ###
+def open_editor(note_mode, note):
+    """Open note editor."""
+
+    return render_template("note_editor.html", note_mode=note_mode, note=note)
+
+
+def modify_note(note):
+    """Modify a note."""
+
+    new_title = request.form.get("title")
+    new_body = request.form.get("body")
+    date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+
+    note.title = new_title
+    note.body = new_body
+    note.date_modified = date_modified
+
+    return note
 
 
 if __name__ == "__main__":
