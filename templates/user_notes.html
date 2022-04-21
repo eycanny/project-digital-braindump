@@ -9,6 +9,9 @@
   <form action="/create-note" id="create">
     <input type="submit" value="Create a New Note">
   </form>
+  <form action="/logout" id="logout">
+    <input type="submit" value="Logout">
+  </form>
   {% for note in notes %}
     <div>
       {% if note.title %}
