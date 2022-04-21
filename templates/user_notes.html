@@ -17,7 +17,7 @@
 
   <section id="note-container">
     {% for note in notes %}
-    <form action="/{{note.user_id}}/notes/{{note.note_id}}" class="note">
+    <form action="/notes/{{ note.note_id }}" class="note">
     <button>
       {% if note.title %}
         <h2>{{ note.title }}</h2>

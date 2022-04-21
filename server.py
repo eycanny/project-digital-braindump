@@ -20,7 +20,7 @@ def view_homepage():
     user = crud.get_user_by_email(user_email)
 
     if user:
-        return redirect(f"/{user.user_id}/notes")
+        return redirect("/notes")
 
     return render_template("homepage.html")
 
@@ -40,7 +40,7 @@ def process_login():
         return redirect("/")
     else:
         session["user_email"] = user.email
-        return redirect(f"/{user.user_id}/notes")
+        return redirect("/notes")
 
 
 @app.route("/create-note")
@@ -62,30 +62,31 @@ def create_note():
     db.session.add(new_note)
     db.session.commit()
 
-    return redirect(f"/{user.user_id}/notes")
+    return redirect("/notes")
 
-@app.route("/<user_id>/notes")
-def view_notes(user_id):
+@app.route("/notes")
+def view_notes():
     """Show notes of user."""
 
     if session["user_email"] == None:
         flash("You must be logged in to view your notes.")
         return redirect("/")
 
-    user = crud.get_user_by_id(user_id)
-    notes = crud.get_note_by_user(user_id)
+    user = crud.get_user_by_email(session["user_email"])
+    notes = crud.get_note_by_user(user.user_id)
 
     return render_template("user_notes.html", notes=notes, user=user)
 
 
-@app.route("/<user_id>/notes/<note_id>")
-def view_note(user_id, note_id):
+@app.route("/notes/<note_id>")
+def view_note(note_id):
     """Show a note."""
 
-    note = crud.get_note_by_id(note_id=note_id, user_id=user_id)
+    user = crud.get_user_by_email(session["user_email"])
+    note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
 
     return render_template("note_details.html", note=note)
-    
+
 
 @app.route("/search")
 def view_notes_by_keyword():
