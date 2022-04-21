@@ -45,22 +45,7 @@ def create_note(user, title = None, body = None):
     return note
 
 
-def modify_note(note):
-    """Modify a note."""
-
-    #requires data from html
-    new_title = request.form.get("title")
-    new_body = request.form.get("body")
-    date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
-
-    note.title = new_title
-    note.body = new_body
-    note.date_modified = date_modified
-
-    return note
-
-
-def delete_note(note):
+def delete_note(note_id):
     """Delete a note."""
 
     #User clicks on delete button
@@ -71,7 +56,7 @@ def delete_note(note):
 def get_note_by_user(user_id):
     """Return notes by user id."""
 
-    return Note.query.filter(Note.user_id == user_id).all()
+    return Note.query.filter(Note.user_id == user_id).order_by(Note.note_id).all()
 
 
 def get_note_by_id(note_id, user_id):
