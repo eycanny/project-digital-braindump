@@ -16,8 +16,9 @@ model.db.create_all()
 for n in range(10):
     email = f"user{n}@test.com"
     password = "test"
+    username = f"user{n}"
 
-    user = crud.create_user(email, password)
+    user = crud.create_user(email=email, password=password, username=username)
     model.db.session.add(user)
     model.db.session.commit()
     

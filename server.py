@@ -28,6 +28,32 @@ def view_homepage():
     return render_template("homepage.html")
 
 
+@app.route("/users", methods=["POST"])
+def create_account():
+    """Create a new account for user."""
+
+    username = request.form.get("username")
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = crud.get_user_by_email(email)
+    username_check = crud.get_user_by_username(username)
+
+    if user:
+        flash("Cannot create an account with that email. Try again.")
+
+    elif username_check:
+        flash("That username is taken. Try again.")
+
+    else:
+        user = crud.create_user(email=email, password=password, username=username)
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created! Please log in.")
+
+    return redirect("/")
+
+
 @app.route("/login", methods = ["POST"])
 def process_login():
     """Process user login.

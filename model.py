@@ -17,12 +17,12 @@ class User(db.Model):
     password = db.Column(db.String, nullable = False)
 
     #2.0
-    #username = db.Column(db.String(20), unique = True, nullable = False)
+    username = db.Column(db.String(20), unique = True, nullable = False)
 
     notes = db.relationship("Note", back_populates = "user")
 
     def __repr__(self):
-        return f"<User user_id = {self.user_id} email = {self.email}>"
+        return f"<User user_id = {self.user_id} email = {self.email} username = {self.username}>"
 
 
 class Note(db.Model):

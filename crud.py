@@ -3,11 +3,11 @@
 from model import db, User, Note, connect_to_db
 from datetime import datetime
 
-# MVP
-def create_user(email, password):
+
+def create_user(email, password, username):
     """Create and return a new user."""
 
-    user = User(email = email, password = password)
+    user = User(email = email, password = password, username = username)
 
     return user
 
@@ -18,17 +18,16 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
+def get_user_by_username(username):
+    """Return a user by username."""
+
+    return User.query.filter(User.username == username).first()
+
+
 def get_user_by_id(user_id):
     """Return a user by user id."""
 
     return User.query.filter(User.user_id == user_id).first()
-
-
-# 2.0
-# def create_user(email, password, username):
-#     """Create and return a new user."""
-#     user = User(email=email, password=password, username=username)
-#     return user
 
 
 def create_note(user, title = None, body = None):

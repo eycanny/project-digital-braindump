@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="login-form">
+  <section class="login-form">
     <h2>Log In</h2>
     <form action="/login" method="POST">
       <p>
@@ -23,5 +23,28 @@
         <input type="submit">
       </p>
     </form>
-  </div>
+  </section>
+  <section class="create-user-form">
+    <h2>Create an Account</h2>
+    <form action="/users" method="POST">
+      <p>
+        <label for="username">Username</label>
+        <input type="text" name="username">
+      </p>
+      
+      <p>
+        <label for="name">Email</label>
+        <input type="text" name="email">
+      </p>
+
+      <p>
+        <label for="password">Password</label>
+        <input type="password" name="password">
+      </p>
+
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+  </section>
 {% endblock %}
