@@ -69,7 +69,7 @@ def get_note_by_keyword(keyword, user_id):
     """Return notes containing keyword."""
 
     return Note.query.filter(
-        (Note.title.like(f"%{keyword}%")) | (Note.body.like(f"%{keyword}%")),
+        (Note.title.ilike(f"%{keyword}%")) | (Note.body.ilike(f"%{keyword}%")),
         Note.user_id == user_id
         ).all()
 
