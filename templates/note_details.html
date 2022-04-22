@@ -20,15 +20,15 @@
 
 <section class="note-options">
     <form action="/notes">
-        <input type="submit" value="RETURN TO NOTES">
+        <input type="submit" value="Return to Notes">
     </form>
 
     <form action="/notes/{{ note.note_id }}/edit">
-        <input type="submit" value="EDIT NOTE">
+        <input type="submit" value="Edit Note">
     </form>
 
     <form action="/delete-note/{{ note.note_id }}" method="POST" id="delete-confirm">
-        <input type="submit" value="DELETE NOTE" id="delete-button">
+        <input type="submit" value="Delete Note" id="delete-button">
     </form>
 </section>
 {% endblock %}
