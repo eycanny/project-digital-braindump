@@ -14,7 +14,7 @@ app.jinja_env.undefined = StrictUndefined
 
 ##############################################################################
 
-### Homepage, Login/Logout ###
+### Homepage, Login/Logout, Cancel ###
 @app.route("/")
 def view_homepage():
     """View homepage."""
@@ -52,7 +52,15 @@ def process_logout():
 
     session["user_email"] = None
 
-    return redirect("/") 
+    return redirect("/")
+
+
+@app.route("/cancel")
+def cancel_process():
+    """Cancel whatever user was doing and return them to the notes page."""
+
+    return redirect("/notes")
+
 
 ##############################################################################
 
@@ -60,6 +68,12 @@ def process_logout():
 @app.route("/create-note")
 def open_editor_to_create():
     """Open note editor for a new note."""
+
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to create notes.")
+        return redirect("/")
 
     note_mode = "create"
 
@@ -87,7 +101,11 @@ def create_note():
 def view_notes():
     """Show notes of user."""
 
-    check_user_login()
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to view your notes.")
+        return redirect("/")
 
     user = crud.get_user_by_email(session["user_email"])
     notes = crud.get_note_by_user(user.user_id)
@@ -99,7 +117,11 @@ def view_notes():
 def view_note(note_id):
     """Show a note."""
 
-    check_user_login()
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to view your notes.")
+        return redirect("/")
 
     user = crud.get_user_by_email(session["user_email"])
     note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
@@ -111,7 +133,11 @@ def view_note(note_id):
 def view_notes_by_keyword():
     """Return notes with keyword input by user."""
 
-    check_user_login()
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to view your notes.")
+        return redirect("/")
 
     keyword = request.args.get("search")
     user = crud.get_user_by_email(session["user_email"])
@@ -126,6 +152,12 @@ def view_notes_by_keyword():
 @app.route("/notes/<note_id>/edit")
 def open_editor_to_edit(note_id):
     """Open note editor to edit a note."""
+
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to edit your notes.")
+        return redirect("/")
 
     note_mode = "edit"
     user = crud.get_user_by_email(session["user_email"])
@@ -180,18 +212,6 @@ def modify_note(note):
     note.date_modified = date_modified
 
     return note
-
-
-def check_user_login():
-    """Check if user is logged in.
-    
-    Redirect user to homepage if not logged in."""
-
-    session["user_email"] = session.get("user_email")
-
-    if session["user_email"] == None:
-        flash("You must be logged in to view your notes.")
-        return redirect("/")
 
 
 if __name__ == "__main__":
