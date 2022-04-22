@@ -12,6 +12,14 @@
         <p>
             Body <textarea type="text" name="body"></textarea>
         </p>
+    <form>
+        <p>
+            <input type="submit" value="Save">
+        </p>
+    </form>
+    <form action="/cancel">
+        <input type="submit" value="Cancel">
+    </form>
     {% endif %}
 
     {% if note_mode == "edit" %}
@@ -23,9 +31,13 @@
         <p>
             Body <textarea type="text" name="body">{{ note.body }}</textarea>
         </p>
-    {% endif %}
+    <form>
         <p>
             <input type="submit" value="Save">
         </p>
     </form>
+    <form action="/notes/{{ note.note_id }}">
+        <input type="submit" value="Cancel">
+    </form>
+    {% endif %}
 {% endblock %}
