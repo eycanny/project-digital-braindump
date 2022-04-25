@@ -3,16 +3,32 @@
 
 {% block body %}
   <section id="user-options">
-    <form action="/search" id="search-option">
-      <input type="text" name="search">
-      <input type="submit" value="Search Keyword" id="search-button">
-    </form>
-    <form action="/create-note" id="create-option">
-      <input type="submit" value="Create New Note" id="create-note-button">
-    </form>
-    <form action="/logout" id="logout-option">
-      <input type="submit" value="Log Out" id="logout-button">
-    </form>
+    <div>
+      <form action="/search" id="search-option">
+        <input type="text" name="search">
+        <input type="submit" value="Search Keyword" id="search-button">
+      </form>
+
+      <form action="/sort-by" id="sort-option">
+        <select name="sort-by" id="sort-by-select">
+          <option value="title-asc">Title, ascending</option>
+          <option value="title-desc">Title, descending</option>
+          <option value="date-created-asc">Date Created, old to new</option>
+          <option value="date-created-desc">Date Created, new to old</option>
+          <option value="date-modified-asc">Date Modified, old to new</option>
+          <option value="date-modified-desc">Date Modified, new to old</option>
+        </select>
+        <button type="submit">Sort</button>
+      </form>
+
+      <form action="/create-note" id="create-option">
+        <input type="submit" value="Create New Note" id="create-note-button">
+      </form>
+
+      <form action="/logout" id="logout-option">
+        <input type="submit" value="Log Out" id="logout-button">
+      </form>
+    </div>  
   </section>
 
   <section id="note-container">
