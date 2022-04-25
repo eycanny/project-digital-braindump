@@ -32,8 +32,8 @@ class Note(db.Model):
 
     #MVP
     note_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    title = db.Column(db.String(60), nullable = True)
-    body = db.Column(db.Text, nullable = True)
+    title = db.Column(db.String(60), nullable = False)
+    body = db.Column(db.Text, nullable = False)
     date_created = db.Column(db.DateTime, nullable = False)
     date_modified = db.Column(db.DateTime, nullable = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
