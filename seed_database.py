@@ -24,7 +24,7 @@ for n in range(10):
     
     for i in range(5):
 
-        note = crud.create_note(user, body = f"Note test{i}")
+        note = crud.create_note(user, title = f"Title test{i}", body = f"Note test{i}")
         model.db.session.add(note)
 
 model.db.session.commit()
