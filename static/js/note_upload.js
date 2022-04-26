@@ -1,16 +1,18 @@
 'use strict';
 
+const myCloudName = cloudinary.setCloudName("digitalbraindump");
+const myPreset = "khfzmnxx"
+
 function showUploadWidget() {
     cloudinary.openUploadWidget({
-        cloudName: "<cloud name>",
-        uploadPreset: "<upload preset>",
+        cloudName: myCloudName,
+        uploadPreset: myPreset,
         sources: [
             "local",
             "url"
         ],
-        googleApiKey: "<image_search_google_api_key>",
         showAdvancedOptions: false,
-        cropping: false,
+        cropping: true,
         multiple: false,
         defaultSource: "local",
         styles: {
