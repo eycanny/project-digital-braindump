@@ -5,12 +5,21 @@ from model import connect_to_db, db
 from datetime import datetime
 import crud
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 app.jinja_env.undefined = StrictUndefined
+
+cloudinary = cloudinary.config(
+    cloud_name = os.environ['CLOUDINARY_NAME'], 
+    api_key = os.environ['CLOUDINARY_KEY'], 
+    api_secret = os.environ['CLOUDINARY_API_SECRET'] 
+)
 
 ##############################################################################
 
