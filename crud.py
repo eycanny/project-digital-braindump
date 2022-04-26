@@ -38,7 +38,7 @@ def create_note(user, title, body):
         title = title, 
         body = body, 
         date_created = datetime.now().strftime("%m-%d-%Y %H:%M:%S"), 
-        date_modified = None,
+        date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S"),
         user_id = user.user_id
     )
 
