@@ -11,6 +11,8 @@ import cloudinary.api
 
 from jinja2 import StrictUndefined
 
+os.system("sudo service postgresql start")
+
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 app.jinja_env.undefined = StrictUndefined
