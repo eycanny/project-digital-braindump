@@ -10,9 +10,13 @@
             Title <input type='text' name="title">
         </p>
         <p>
-            Body <textarea type="text" name="body"></textarea>
+            Body <textarea type="text" name="body" id="text-body"></textarea>
         </p>
-    <form>
+        <p>
+            <button id="image-note" class="cloudinary-button">Upload Image as Note</button>
+            <button id="image-attachment" class="cloudinary-button">Attach Image to Note</button>
+        </p>
+        <img id="uploadedimage" src=""></img> 
         <p>
             <input type="submit" value="Save">
         </p>
@@ -29,9 +33,13 @@
             Title <input type='text' name="title" value="{{ note.title }}">
         </p>
         <p>
-            Body <textarea type="text" name="body">{{ note.body }}</textarea>
+            Body <textarea type="text" name="body" id="text-body">{{ note.body }}</textarea>
         </p>
-    <form>
+        <p>
+            <button id="image-note" class="cloudinary-button">Upload Image as Note</button>
+            <button id="image-attachment" class="cloudinary-button">Attach Image to Note</button>
+        </p>
+        <img id="uploadedimage" src=""></img> 
         <p>
             <input type="submit" value="Save">
         </p>
