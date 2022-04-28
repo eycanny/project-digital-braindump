@@ -17,11 +17,9 @@ app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 app.jinja_env.undefined = StrictUndefined
 
-cloudinary = cloudinary.config(
-    cloud_name = os.environ['CLOUDINARY_NAME'], 
-    api_key = os.environ['CLOUDINARY_KEY'], 
-    api_secret = os.environ['CLOUDINARY_API_SECRET'] 
-)
+CLOUDINARY_CLOUD_NAME = os.environ['CLOUDINARY_CLOUD_NAME']
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_API_SECRET = os.environ['CLOUDINARY_API_SECRET']
 
 ##############################################################################
 
@@ -132,7 +130,24 @@ def create_note():
     if body == "":
         body = "(No Body)"
 
-    new_note = crud.create_note(user, title, body)
+    if request.files.get("note-image") != None:
+        image_as_note = request.files["note-image"]
+        result = cloudinary.uploader.upload(image_as_note,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
+        note_img_url = result["secure_url"]
+        body = note_img_url
+
+    if request.files.get("note-attachment") != None:
+        image_as_attachment = request.files["note-attachment"]
+        result = cloudinary.uploader.upload(image_as_attachment,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
+        image = result["secure_url"]
+    
+    new_note = crud.create_note(user, title, body, image)
     db.session.add(new_note)
     db.session.commit()
 
@@ -289,11 +304,21 @@ def modify_note(note):
 
     new_title = request.form.get("title")
     new_body = request.form.get("body")
+    new_image = request.files.get("note-attachment")
     date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+
+    if new_image != None:
+        image_as_attachment = request.files["note-attachment"]
+        result = cloudinary.uploader.upload(image_as_attachment,
+                                            api_key=cloudinary.api_key,
+                                            api_secret=cloudinary.api_secret,
+                                            cloud_name=cloudinary.cloud_name)
+        new_image = result["secure_url"]
 
     note.title = new_title
     note.body = new_body
     note.date_modified = date_modified
+    note.image = new_image
 
     return note
 
