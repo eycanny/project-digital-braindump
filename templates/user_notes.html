@@ -42,6 +42,10 @@
       {% if note.body %}
         <p>{{ note.body }}</p>
       {% endif %}
+
+      {% if note.image %}
+        <img src="{{ note.image }}"></img>
+      {% endif %}
     </button>
     </form>
     {% endfor %}

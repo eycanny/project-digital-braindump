@@ -18,6 +18,12 @@
         <p>{{ note.body }}</p>
 </section>
 
+{% if note.image %}
+    <section class="image">
+        <img src="{{ note.image }}"></img>
+    </section>
+{% endif %}
+
 <section class="note-options">
     <form action="/notes">
         <input type="submit" value="Return to Notes">
