@@ -32,11 +32,12 @@ class Note(db.Model):
 
     #MVP
     note_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    title = db.Column(db.String(60), nullable = False)
-    body = db.Column(db.Text, nullable = False)
+    title = db.Column(db.String(60))
+    body = db.Column(db.Text)
     date_created = db.Column(db.DateTime, nullable = False)
     date_modified = db.Column(db.DateTime, nullable = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+    image = db.Column(db.String, nullable = True)
 
     user = db.relationship("User", back_populates = "notes")
 
