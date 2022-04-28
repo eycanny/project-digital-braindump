@@ -31,7 +31,7 @@ def get_user_by_id(user_id):
     return User.query.filter(User.user_id == user_id).first()
 
 
-def create_note(user, title, body):
+def create_note(user, title, body, image):
     """Create and return a new note."""
 
     note = Note(
@@ -39,7 +39,8 @@ def create_note(user, title, body):
         body = body, 
         date_created = datetime.now().strftime("%m-%d-%Y %H:%M:%S"), 
         date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S"),
-        user_id = user.user_id
+        user_id = user.user_id,
+        image = image
     )
 
     return note
