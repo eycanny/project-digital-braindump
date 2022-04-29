@@ -15,7 +15,13 @@
 
 <section class="body">
     <h3>Body</h3>
-        <p>{{ note.body }}</p>
+    {% if note.body %}
+        {% if "/digitalbraindump/image/upload/" in note.body %}
+            <img src="{{ note.body}}"></img>
+        {% else %}
+            <p>{{ note.body }}</p>
+        {% endif %}
+    {% endif %}
 </section>
 
 {% if note.image %}

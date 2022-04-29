@@ -40,7 +40,11 @@
       {% endif %}
 
       {% if note.body %}
-        <p>{{ note.body }}</p>
+        {% if "/digitalbraindump/image/upload/" in note.body %}
+          <img src="{{ note.body}}"></img>
+        {% else %}
+          <p>{{ note.body }}</p>
+        {% endif %}
       {% endif %}
 
       {% if note.image %}

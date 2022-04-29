@@ -123,21 +123,21 @@ def create_note():
     title = request.form.get("title")
     body = request.form.get("body")
     user = crud.get_user_by_email(session["user_email"])
+    image = None
 
     if title == "":
         title = "(No Title)"
 
-    if body == "":
+    if (body == "") or (body == None):
         body = "(No Body)"
 
-    if request.files.get("note-image") != None:
+    if ((body == None) or body == "(No Body)") and (request.files.get("note-image") != None):
         image_as_note = request.files["note-image"]
         result = cloudinary.uploader.upload(image_as_note,
                                             api_key=CLOUDINARY_KEY,
                                             api_secret=CLOUDINARY_API_SECRET,
                                             cloud_name=CLOUDINARY_CLOUD_NAME)
-        note_img_url = result["secure_url"]
-        body = note_img_url
+        body = result["secure_url"]
 
     if request.files.get("note-attachment") != None:
         image_as_attachment = request.files["note-attachment"]
@@ -310,9 +310,9 @@ def modify_note(note):
     if new_image != None:
         image_as_attachment = request.files["note-attachment"]
         result = cloudinary.uploader.upload(image_as_attachment,
-                                            api_key=cloudinary.api_key,
-                                            api_secret=cloudinary.api_secret,
-                                            cloud_name=cloudinary.cloud_name)
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
         new_image = result["secure_url"]
 
     note.title = new_title
