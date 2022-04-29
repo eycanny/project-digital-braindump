@@ -1,6 +1,6 @@
 'use strict';
 
-const imageNoteButton = document.querySelector("#image-note")
+const imageNoteButton = document.querySelector("#image-note-btn")
 const noteBody = document.querySelector("#note-body")
 
 imageNoteButton.addEventListener("click", (evt) => {
@@ -9,7 +9,7 @@ imageNoteButton.addEventListener("click", (evt) => {
   noteBody.innerHTML = 'Body<br/>This is for uploading an image as a note. <input type="file" name="note-image">'
 })
 
-const imageAttachmentButton = document.querySelector("#image-attachment")
+const imageAttachmentButton = document.querySelector("#image-attachment-btn")
 
 imageAttachmentButton.addEventListener("click", (evt) => {
   evt.preventDefault();
