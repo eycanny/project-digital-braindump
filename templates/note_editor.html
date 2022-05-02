@@ -36,7 +36,11 @@
         </p>
         <p id="note-body">
             Body<br/>
+            {% if "/digitalbraindump/image/upload/" in note.body %}
+                <img src="{{ note.body}}"></img>
+            {% else %}
             <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px">{{ note.body }}</textarea>
+            {% endif %}    
         </p>
         {% if note.image %}
         <img src="{{ note.image }}"></img>
