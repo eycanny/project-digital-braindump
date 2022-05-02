@@ -235,7 +235,7 @@ def edit_note(note_id):
     note = modify_note(note)
     db.session.commit()
 
-    return redirect("/notes")
+    return redirect(f"/notes/{note_id}")
 
 
 @app.route("/delete-note/<note_id>", methods=["POST"])
@@ -299,28 +299,39 @@ def open_editor(note_mode, note):
     return render_template("note_editor.html", note_mode=note_mode, note=note)
 
 
-def modify_note(note):
-    """Modify a note."""
+# def modify_note(note):
+#     """Modify a note."""
 
-    new_title = request.form.get("title")
-    new_body = request.form.get("body")
-    new_image = request.files.get("note-attachment")
-    date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+#     new_title = request.form.get("title")
+#     new_body = request.form.get("body")
+#     date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
+#     new_image = note.image
 
-    if new_image != None:
-        image_as_attachment = request.files["note-attachment"]
-        result = cloudinary.uploader.upload(image_as_attachment,
-                                            api_key=CLOUDINARY_KEY,
-                                            api_secret=CLOUDINARY_API_SECRET,
-                                            cloud_name=CLOUDINARY_CLOUD_NAME)
-        new_image = result["secure_url"]
+#     if request.files.get("note-image") == None:
+#         new_body = "(No Body)"
 
-    note.title = new_title
-    note.body = new_body
-    note.date_modified = date_modified
-    note.image = new_image
+#     elif ((new_body == None) or new_body == "(No Body)") and (request.files.get("note-image") != None):
+#         image_as_note = request.files["note-image"]
+#         result = cloudinary.uploader.upload(image_as_note,
+#                                             api_key=CLOUDINARY_KEY,
+#                                             api_secret=CLOUDINARY_API_SECRET,
+#                                             cloud_name=CLOUDINARY_CLOUD_NAME)
+#         new_body = result["secure_url"]
 
-    return note
+#     if request.files.get("note-attachment") != None:
+#         image_as_attachment = request.files["note-attachment"]
+#         result = cloudinary.uploader.upload(image_as_attachment,
+#                                             api_key=CLOUDINARY_KEY,
+#                                             api_secret=CLOUDINARY_API_SECRET,
+#                                             cloud_name=CLOUDINARY_CLOUD_NAME)
+#         new_image = result["secure_url"]
+
+#     note.title = new_title
+#     note.body = new_body
+#     note.date_modified = date_modified
+#     note.image = new_image
+
+#     return note
 
 
 if __name__ == "__main__":
