@@ -8,10 +8,11 @@ import os
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import werkzeug
 
 from jinja2 import StrictUndefined
 
-os.system("sudo service postgresql start")
+# os.system("sudo service postgresql start")
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
@@ -131,7 +132,7 @@ def create_note():
     if body == "":
         body = "(No Body)"
 
-    if (request.files.get("note-image") != None) and (request.files.get("note-image").content_length > 0):
+    if (request.files.get("note-image") != None) and (request.files.get("note-image").content_type != "application/octet-stream"):
         image_as_note = request.files["note-image"]
         result = cloudinary.uploader.upload(image_as_note,
                                             api_key=CLOUDINARY_KEY,
@@ -139,7 +140,7 @@ def create_note():
                                             cloud_name=CLOUDINARY_CLOUD_NAME)
         body = result["secure_url"]
 
-    if (request.files.get("note-attachment") != None) and (request.files.get("note-attachment").content_length > 0):
+    if (request.files.get("note-attachment") != None) and (request.files.get("note-attachment").content_type != "application/octet-stream"):
         image_as_attachment = request.files["note-attachment"]
         result = cloudinary.uploader.upload(image_as_attachment,
                                             api_key=CLOUDINARY_KEY,
@@ -307,27 +308,21 @@ def modify_note(note):
     date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
     new_image = note.image
 
-    if request.files.get("note-image") != None:
-        if request.files.get("note-image").content_length == 0:
-            if (new_body == "") or (new_body == None):
-                new_body = "(No Body)"
+    if (request.files.get("note-image") != None) and (request.files.get("note-image").content_type != "application/octet-stream"):
+        image_as_note = request.files["note-image"]
+        result = cloudinary.uploader.upload(image_as_note,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
+        new_body = result["secure_url"]
 
-        elif request.files.get("note-image").content_length > 0:
-            image_as_note = request.files["note-image"]
-            result = cloudinary.uploader.upload(image_as_note,
-                                                api_key=CLOUDINARY_KEY,
-                                                api_secret=CLOUDINARY_API_SECRET,
-                                                cloud_name=CLOUDINARY_CLOUD_NAME)
-            new_body = result["secure_url"]
-
-    if request.files.get("note-attachment") != None:
-        if request.files.get("note-attachment").content_length > 0:
-            image_as_attachment = request.files["note-attachment"]
-            result = cloudinary.uploader.upload(image_as_attachment,
-                                                api_key=CLOUDINARY_KEY,
-                                                api_secret=CLOUDINARY_API_SECRET,
-                                                cloud_name=CLOUDINARY_CLOUD_NAME)
-            new_image = result["secure_url"]
+    if (request.files.get("note-attachment") != None) and (request.files.get("note-attachment").content_type != "application/octet-stream"):
+        image_as_attachment = request.files["note-attachment"]
+        result = cloudinary.uploader.upload(image_as_attachment,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
+        new_image = result["secure_url"]
 
     note.title = new_title
     note.body = new_body
