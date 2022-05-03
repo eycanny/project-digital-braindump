@@ -5,10 +5,7 @@ from model import connect_to_db, db
 from datetime import datetime
 import crud
 import os
-import cloudinary
 import cloudinary.uploader
-import cloudinary.api
-import werkzeug
 
 from jinja2 import StrictUndefined
 
