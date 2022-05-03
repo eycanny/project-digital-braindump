@@ -10,7 +10,7 @@ deleteButton.addEventListener('click', (evt) => {
 
     if (result === true) {
         document.querySelector("#delete-confirm")
-                .innerHTML = '<input type="submit" value="I REALLY WANT TO DELETE THIS NOTE">'
+                .innerHTML = '<input type="submit" value="Click to Confirm Deletion">'
     }
 
 });
