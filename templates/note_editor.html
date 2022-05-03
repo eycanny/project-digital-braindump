@@ -14,6 +14,8 @@
             Body<br/>
             <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px"></textarea>
         </p>
+        <p id="image-note-upload"></p>
+        <p id="image-attachment-upload"></p>
         <p>
             <button id="image-note-btn">Upload Image as Note</button>
             <button id="image-attachment-btn">Attach Image to Note</button>
@@ -34,6 +36,7 @@
             Title<br/>
             <input type='text' name="title" value="{{ note.title }}">
         </p>
+
         <p id="note-body">
             Body<br/>
             {% if "/digitalbraindump/image/upload/" in note.body %}
@@ -42,9 +45,15 @@
             <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px">{{ note.body }}</textarea>
             {% endif %}    
         </p>
+
+        <p id="image-note-upload"></p>
+
         {% if note.image %}
+        <p>Image Attachment</p>
         <img src="{{ note.image }}"></img>
         {% endif %}
+
+        <p id="image-attachment-upload"></p>
         <p>
             <button id="image-note-btn">Upload Image as Note</button>
             <button id="image-attachment-btn">Attach Image to Note</button>
