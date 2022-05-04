@@ -6,7 +6,7 @@ const imageNoteUploader = document.querySelector("#image-note-upload");
 imageNoteButton.addEventListener("click", (evt) => {
   evt.preventDefault();
 
-  imageNoteUploader.innerHTML = '<br/>This is for uploading an image as a note and will override anything written in the body textarea. <input type="file" name="note-image" accept="image/*">'
+  imageNoteUploader.innerHTML = '<br/>This is for uploading an image as a note and will override anything written in the body textbox. <input type="file" name="note-image" accept="image/*">'
 });
 
 const imageAttachmentButton = document.querySelector("#image-attachment-btn");
