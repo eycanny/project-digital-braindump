@@ -3,32 +3,61 @@
 
 {% block body %}
   <section id="user-options">
-    <div>
-      <form action="/search" id="search-option">
-        <input type="text" name="search">
-        <input type="submit" value="Search Keyword" id="search-button">
-      </form>
+    <!-- Feature: Keyword Search -->
+    <form action="/search" id="search-option">
+      <input type="text" name="search">
+      <input type="submit" value="Search Keyword" id="search-button">
+    </form>
 
-      <form action="/sort-by" id="sort-option">
-        <select name="sort-by" id="sort-by-select">
-          <option value="title-asc">Title, ascending</option>
-          <option value="title-desc">Title, descending</option>
-          <option value="date-created-asc">Date Created, old to new</option>
-          <option value="date-created-desc">Date Created, new to old</option>
-          <option value="date-modified-asc">Date Modified, old to new</option>
-          <option value="date-modified-desc">Date Modified, new to old</option>
-        </select>
-        <button type="submit">Sort</button>
-      </form>
+    <!-- Feature: Sort Filters -->
+    <form action="/sort-by" id="sort-option">
+      <select name="sort-by" id="sort-by-select">
+        <option value="title-asc">Title, ascending</option>
+        <option value="title-desc">Title, descending</option>
+        <option value="date-created-asc">Date Created, old to new</option>
+        <option value="date-created-desc">Date Created, new to old</option>
+        <option value="date-modified-asc">Date Modified, old to new</option>
+        <option value="date-modified-desc">Date Modified, new to old</option>
+      </select>
+      <button type="submit">Sort</button>
+    </form>
 
-      <form action="/create-note" id="create-option">
-        <input type="submit" value="Create New Note" id="create-note-button">
-      </form>
+    <!-- Feature: Note Creation Modal -->
+    <button id="create-note-button">Create a Note</button>
 
-      <form action="/logout" id="logout-option">
-        <input type="submit" value="Log Out" id="logout-button">
+    <div class="modal-box" id="modal-box">
+      <form action="/create-note" method="POST" enctype="multipart/form-data">
+      <div class="modal-content" id="modal-content">
+        <div class="modal-header">
+          <h2>Create a Note</h2>
+        </div>
+        <div class="modal-body">
+          <p>
+              Title<br/>
+              <input type='text' name="title">
+          </p>
+          <p id="note-body">
+              Body<br/>
+              <textarea type="text" name="body" id="text-body" style="width: 100%"></textarea>
+          </p>
+          <p id="image-note-upload"></p>
+          <p id="image-attachment-upload"></p>
+          <p>
+              <button id="image-note-btn">Upload Image as Note</button>
+              <button id="image-attachment-btn">Attach Image to Note</button>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="save" id="save-button">Save</button>
+          <button class="cancel" id="cancel-button">Cancel</button>
+        </div>
+      </div>
       </form>
-    </div>  
+    </div>
+
+    <form action="/logout" id="logout-option">
+      <input type="submit" value="Log Out" id="logout-button">
+    </form> 
   </section>
 
   <section id="note-container">
@@ -56,5 +85,9 @@
   </section>
 {% endblock %}
 
-{% block js %}<script src="/static/js/notes.js"></script>{% endblock %}
+{% block js %}
+<script src="/static/js/notes.js"></script>
+<script src="/static/js/modal.js"></script>
+<script src="/static/js/note_upload.js"></script>
+{% endblock %}
 
