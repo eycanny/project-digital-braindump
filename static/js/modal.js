@@ -1,3 +1,5 @@
+'use strict';
+
 const createNoteButton = document.querySelector("#create-note-button");
 const box = document.getElementById("modal-box");
 
