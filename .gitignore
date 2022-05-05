@@ -3,3 +3,5 @@ brainstorm
 __pycache__
 *.pyc
 *.sh
+test_server.py
+templates/test_user_notes.html
