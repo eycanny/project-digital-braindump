@@ -129,21 +129,13 @@ def create_note():
     if body == "":
         body = "(No Body)"
 
-    if (request.files.get("note-image") != None) and (request.files.get("note-image").content_type != "application/octet-stream"):
-        image_as_note = request.files["note-image"]
-        result = cloudinary.uploader.upload(image_as_note,
-                                            api_key=CLOUDINARY_KEY,
-                                            api_secret=CLOUDINARY_API_SECRET,
-                                            cloud_name=CLOUDINARY_CLOUD_NAME)
-        body = result["secure_url"]
+    images = upload_to_cloudinary()
 
-    if (request.files.get("note-attachment") != None) and (request.files.get("note-attachment").content_type != "application/octet-stream"):
-        image_as_attachment = request.files["note-attachment"]
-        result = cloudinary.uploader.upload(image_as_attachment,
-                                            api_key=CLOUDINARY_KEY,
-                                            api_secret=CLOUDINARY_API_SECRET,
-                                            cloud_name=CLOUDINARY_CLOUD_NAME)
-        image = result["secure_url"]
+    if (images["note_image"] != None) and (type(images["note_image"]) == str):
+        body = images["note_image"]
+
+    if (images["note_attachment"] != None) and (type(images["note_attachment"]) == str):
+        image = images["note_attachment"]
     
     new_note = crud.create_note(user, title, body, image)
     db.session.add(new_note)
@@ -305,21 +297,13 @@ def modify_note(note):
     date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
     new_image = note.image
 
-    if (request.files.get("note-image") != None) and (request.files.get("note-image").content_type != "application/octet-stream"):
-        image_as_note = request.files["note-image"]
-        result = cloudinary.uploader.upload(image_as_note,
-                                            api_key=CLOUDINARY_KEY,
-                                            api_secret=CLOUDINARY_API_SECRET,
-                                            cloud_name=CLOUDINARY_CLOUD_NAME)
-        new_body = result["secure_url"]
+    images = upload_to_cloudinary()
 
-    if (request.files.get("note-attachment") != None) and (request.files.get("note-attachment").content_type != "application/octet-stream"):
-        image_as_attachment = request.files["note-attachment"]
-        result = cloudinary.uploader.upload(image_as_attachment,
-                                            api_key=CLOUDINARY_KEY,
-                                            api_secret=CLOUDINARY_API_SECRET,
-                                            cloud_name=CLOUDINARY_CLOUD_NAME)
-        new_image = result["secure_url"]
+    if (images["note_image"] != None) and (type(images["note_image"]) == str):
+        new_body = images["note_image"]
+
+    if (images["note_attachment"] != None) and (type(images["note_attachment"]) == str):
+        new_image = images["note_attachment"]
 
     note.title = new_title
     note.body = new_body
@@ -327,6 +311,33 @@ def modify_note(note):
     note.image = new_image
 
     return note
+
+
+def upload_to_cloudinary():
+    """Upload file to Cloudinary API."""
+
+    image_uploads = {}
+
+    image_uploads["note_image"] = request.files.get("note-image")
+    image_uploads["note_attachment"] = request.files.get("note-attachment")
+
+    if (request.files.get("note-image") != None) and (request.files.get("note-image").content_type != "application/octet-stream"):
+        image_as_note = request.files["note-image"]
+        result = cloudinary.uploader.upload(image_as_note,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
+        image_uploads["note_image"] = result["secure_url"]
+
+    if (request.files.get("note-attachment") != None) and (request.files.get("note-attachment").content_type != "application/octet-stream"):
+        image_as_attachment = request.files["note-attachment"]
+        result = cloudinary.uploader.upload(image_as_attachment,
+                                            api_key=CLOUDINARY_KEY,
+                                            api_secret=CLOUDINARY_API_SECRET,
+                                            cloud_name=CLOUDINARY_CLOUD_NAME)
+        image_uploads["note_attachment"] = result["secure_url"]
+
+    return image_uploads
 
 
 if __name__ == "__main__":
