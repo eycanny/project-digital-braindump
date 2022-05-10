@@ -8,6 +8,13 @@ createNoteButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
   box.style.display = 'block';
+
+  document.querySelector('#note-title').value = null;
+  document.querySelector('#note-text-body').value = null;
+  document.querySelector('#note-image-body').files = null;
+  document.querySelector('#note-image-attachment').files = null;
+  document.querySelector('#image-note-upload').innerHTML = null;
+  document.querySelector('#image-attachment-upload').innerHTML = null;
 })
 
 // When user clicks outside of modal, modal closes
