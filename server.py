@@ -1,6 +1,6 @@
 """Server for note-taking app."""
 
-from flask import Flask, render_template, request, flash, session, redirect
+from flask import Flask, render_template, request, flash, session, redirect, jsonify
 from model import connect_to_db, db
 from datetime import datetime
 import crud
@@ -99,20 +99,6 @@ def cancel_process():
 ##############################################################################
 
 ### Create Note ###
-@app.route("/create-note")
-def open_editor_to_create():
-    """Open note editor for a new note."""
-
-    session["user_email"] = session.get("user_email")
-
-    if session["user_email"] == None:
-        flash("You must be logged in to create notes.")
-        return redirect("/")
-
-    note_mode = "create"
-
-    return open_editor(note_mode, note=None)
-
 
 @app.route("/create-note", methods=["POST"])
 def create_note():
@@ -199,7 +185,7 @@ def view_notes_by_keyword():
 
 ### Edit Note ###
 @app.route("/notes/<note_id>/edit")
-def open_editor_to_edit(note_id):
+def open_editor(note_id):
     """Open note editor to edit a note."""
 
     session["user_email"] = session.get("user_email")
@@ -208,11 +194,10 @@ def open_editor_to_edit(note_id):
         flash("You must be logged in to edit your notes.")
         return redirect("/")
 
-    note_mode = "edit"
     user = crud.get_user_by_email(session["user_email"])
     note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
 
-    return open_editor(note_mode, note)
+    return render_template("note_editor.html", note=note)
 
 
 @app.route("/edit-note/<note_id>", methods=["POST"])
@@ -283,11 +268,6 @@ def sort_notes():
 ##############################################################################
 
 ### Logic Functions ###
-def open_editor(note_mode, note):
-    """Open note editor."""
-
-    return render_template("note_editor.html", note_mode=note_mode, note=note)
-
 
 def modify_note(note):
     """Modify a note."""
