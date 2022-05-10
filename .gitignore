@@ -5,3 +5,4 @@ __pycache__
 *.sh
 test_server.py
 templates/test_user_notes.html
+static/js/save_note.js
