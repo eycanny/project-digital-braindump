@@ -7,6 +7,9 @@ const accountBox = document.querySelector('#account-info-box');
 loginButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
+  loginButton.style.backgroundColor = 'rgba(34,124,157, 0.6)';
+  createAccountButton.style.backgroundColor = 'rgba(34,124,157, 0.2)';
+
   accountBox.innerHTML =
   `<form action="/login" method="POST">
     <h5><strong>Log into Account</strong></h5>
@@ -25,10 +28,14 @@ loginButton.addEventListener('click', (evt) => {
         <input type="submit">
       </p>
   </form>`;
+
 })
 
 createAccountButton.addEventListener('click', (evt) => {
   evt.preventDefault();
+
+  loginButton.style.backgroundColor = 'rgba(34,124,157, 0.2)';
+  createAccountButton.style.backgroundColor = 'rgba(34,124,157, 0.6)';
 
   accountBox.innerHTML =
   `<form action="/users" method="POST">
@@ -52,4 +59,5 @@ createAccountButton.addEventListener('click', (evt) => {
         <input type="submit">
       </p>
   </form>`;
+
 })
