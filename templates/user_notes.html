@@ -4,36 +4,33 @@
 {% block body %}
   <div class="row" id="user-options">
     <div class="row">
-      <!-- <div class="col-9" id="search-col" align="right"> -->
+      <div class="col-9" id="search-col">
         <!-- Feature: Keyword Search -->
-        <!-- <form action="/search" id="search-option">
-            <input class="form-control form-control-sm" type="search" name="search" id="search-bar">
+        <form action="/search" id="search-option">
+          <div class="input-group mb-3">
+            <input class="form-control" type="search" name="search" id="search-bar">
             <div class="input-group-append">
-              <button id="search-button">Seach Keyword</button>
+              <button class="btn btn-outline-secondary note-btn" id="search-button">Seach Keyword</button>
             </div>
-        </form>
-      </div> -->
-      <!-- Feature: Keyword Search -->
-      <form action="/search" id="search-option">
-        <div class="col-9 input-group mb-3" id="search-col">
-          <input type="search" class="form-control" name="search" id="search-bar">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="search-button">Seach Keyword</button>
           </div>
-        </div>
-      </form>
-      <div class="col-3" id="sort-col" align="right">
+        </form>
+      </div>
+      <div class="col-3" id="sort-col">
         <!-- Feature: Sort Filters -->
         <form action="/sort-by" id="sort-option">
+          <div class="input-group">
             <select class="custom-select" name="sort-by" id="sort-by-select">
               <option value="title-asc">Title, ascending</option>
               <option value="title-desc">Title, descending</option>
-              <option value="date-created-asc">Date Created, old to new</option>
+              <option value="date-created-asc" selected>Date Created, old to new</option>
               <option value="date-created-desc">Date Created, new to old</option>
               <option value="date-modified-asc">Date Modified, old to new</option>
               <option value="date-modified-desc">Date Modified, new to old</option>
             </select>
-          <button type="submit">Sort</button>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary note-btn" id="sort-button">Sort</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

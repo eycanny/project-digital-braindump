@@ -42,6 +42,12 @@ body {
 table {
     margin: 15px;
 }
+
+/* Notes page */
+.note-btn {
+    background-color: rgba(34,124,157, 0.6);
+    color: rgb(254,249,239);
+}
 /* Modal */
 
 .modal-box {

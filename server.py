@@ -176,6 +176,10 @@ def view_notes_by_keyword():
         return redirect("/")
 
     keyword = request.args.get("search")
+
+    if not keyword:
+        return redirect("/notes")
+
     user = crud.get_user_by_email(session["user_email"])
 
     notes = crud.get_note_by_keyword(keyword, user.user_id)
