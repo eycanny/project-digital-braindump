@@ -2,45 +2,66 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/styles.css">
+
     <title>
       {% block title %}{% endblock %}
     </title>
+
   </head>
+
   <body>
-    {% for msg in get_flashed_messages() %}
-      <p class="flash-msg">
-        {{ msg }}
-      </p>
-    {% endfor %}
-
-    {% block before_quote %}{% endblock %}
-
-    {% block quote %}
-      <div class="quote">
-        <h2>Quote of the Day</h2>
-        <p id="affirmation"></p>
+    <div class="container-fluid">
+      <div class="row">
+      <!-- Flash messages, if any -->
+      {% for msg in get_flashed_messages() %}
+        <p class="flash-msg">
+          {{ msg }}
+        </p>
+      {% endfor %}
       </div>
-    {% endblock %}
 
-    {% block body %}{% endblock %}
+      <div class="row">
+      <!-- If anything needs to appear above quote -->
+      {% block before_quote %}{% endblock %}
+      </div>
 
-    {% block after_body %}{% endblock %}
+      <div class="row">
+      <!-- Quote -->
+      {% block quote %}
+        <div class="quote text-center">
+          <!-- <h2>Quote of the Day</h2> -->
+          <p id="affirmation"></p>
+        </div>
+      {% endblock %}
+      </div>
 
-    {% block js %}{% endblock %}
-    <br />
-    <br />
-    <br />
-    <script src="/static/js/inspiration.js"></script>
-    <div id="they-said-so">
-      Quotes courtesy of <a href="https://quotes.rest/" target="_blank">They Said So</a>
+      <div class="row">
+      <!-- Page Content -->
+      {% block body %}{% endblock %}
+      </div>
+
+      <div class="row">
+        <!-- Credits -->
+        <div class="text-center" id="they-said-so">
+          Quotes courtesy of <a href="https://quotes.rest/" target="_blank">They Said So</a>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Page Javascript -->
+    {% block js %}{% endblock %}
+    <!-- Quote Javascript -->
+    <script src="/static/js/inspiration.js"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  
   </body>
 </html>

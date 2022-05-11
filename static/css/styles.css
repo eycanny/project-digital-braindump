@@ -1,3 +1,41 @@
+/* Color Palette */
+colors {
+    color: #227C9D; /* rgb(34, 124, 157) */
+    color: #17C3B2; /* rgb(23, 195, 178) */
+    color: #FFCB77; /* rgb(255, 203, 119) */
+    color: #FEF9EF; /* rgb(254, 249, 239) */
+    color: #FE6D73; /* rgb(254, 109, 115) */
+}
+
+
+/* Page */
+body {
+    background-color: rgba(23, 195, 178, 0.1);
+    color: rgb(34, 124, 157);
+}
+.text-center {
+    text-align: center;
+}
+
+/* Homepage */
+.homepage-btn {
+    border: none;
+    display: inline-block;
+    font-size: 16px;
+    text-align: center;
+    background-color: rgba(34,124,157, 0.6);
+    color: rgb(254,249,239);
+    width: 200px;
+}
+
+#account-info-box {
+    border:solid #227C9D;
+    padding: 12px;
+}
+
+table {
+    margin: 15px;
+}
 /* Modal */
 
 .modal-box {
