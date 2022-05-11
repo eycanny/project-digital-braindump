@@ -16,7 +16,48 @@
           </div>
         </form>
       </div>
-      <div class="col-3" id="sort-col">
+      <div class="col">
+        <form action="/logout" id="logout-option">
+          <button class="btn btn-outline-secondary note-btn" type="submit" id="logout-button">Log Out</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" align="right">
+        <!-- Feature: Note Creation Modal -->
+        <button class="btn btn-outline-secondary note-btn" id="create-note-button">Create a Note</button>
+
+        <div class="modal-box" id="modal-box">
+          <form action="/create-note" method="POST" enctype="multipart/form-data">
+            <div class="modal-content" id="modal-content" align="left">
+              <div class="modal-header">
+                <h2>Create a Note</h2>
+              </div>
+              <div class="modal-body">
+                <p>
+                    Title<br/>
+                    <input type='text' name="title">
+                </p>
+                <p id="note-body">
+                    Body<br/>
+                    <textarea type="text" name="body" id="text-body" style="width: 100%"></textarea>
+                </p>
+                <p id="image-note-upload"></p>
+                <p id="image-attachment-upload"></p>
+                <p align="right">
+                    <button class="btn btn-outline-secondary note-btn" id="image-note-btn">Upload Image as Note</button>
+                    <button class="btn btn-outline-secondary note-btn" id="image-attachment-btn">Attach Image to Note</button>
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-outline-secondary save" id="save-button">Save</button>
+                <button class="btn btn-outline-secondary cancel" id="cancel-button">Cancel</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col" id="sort-col">
         <!-- Feature: Sort Filters -->
         <form action="/sort-by" id="sort-option">
           <div class="input-group">
@@ -35,43 +76,6 @@
         </form>
       </div>
     </div>
-
-    <!-- Feature: Note Creation Modal -->
-    <button id="create-note-button">Create a Note</button>
-
-    <div class="modal-box" id="modal-box">
-      <form action="/create-note" method="POST" enctype="multipart/form-data">
-      <div class="modal-content" id="modal-content">
-        <div class="modal-header">
-          <h2>Create a Note</h2>
-        </div>
-        <div class="modal-body">
-          <p>
-              Title<br/>
-              <input type='text' name="title">
-          </p>
-          <p id="note-body">
-              Body<br/>
-              <textarea type="text" name="body" id="text-body" style="width: 100%"></textarea>
-          </p>
-          <p id="image-note-upload"></p>
-          <p id="image-attachment-upload"></p>
-          <p>
-              <button id="image-note-btn">Upload Image as Note</button>
-              <button id="image-attachment-btn">Attach Image to Note</button>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button class="save" id="save-button">Save</button>
-          <button class="cancel" id="cancel-button">Cancel</button>
-        </div>
-      </div>
-      </form>
-    </div>
-
-    <form action="/logout" id="logout-option">
-      <button type="submit" id="logout-button">Log Out</button>
-    </form> 
   </div>
 
   <section id="note-container">
