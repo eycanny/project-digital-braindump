@@ -22,6 +22,12 @@ body {
     margin: 10px;
 }
 
+button {
+    text-align: center;
+    background-color: rgba(34,124,157, 0.6);
+    color: rgb(254,249,239);
+}
+
 /* Homepage */
 .homepage-btn {
     border: none;
@@ -59,7 +65,7 @@ table {
     left: 0;
     top: 0;
     background-color: rgb(254,249,239);
-    background-color: rgba(34,124,157,0.1);
+    background-color: rgba(34,124,157,0.3);
 }
 
 .modal-content {

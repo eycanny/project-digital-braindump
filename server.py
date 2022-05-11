@@ -9,7 +9,7 @@ import cloudinary.uploader
 
 from jinja2 import StrictUndefined
 
-# os.system("sudo service postgresql start")
+os.system("sudo service postgresql start")
 
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
@@ -76,7 +76,7 @@ def process_login():
         return redirect("/")
     else:
         session["user_email"] = user.email
-        flash(f"Logged in account successfully. Welcome back, {user.username}.")
+        flash(f"Logged into account successfully. Welcome back, {user.username}.")
         return redirect("/notes")
 
 
