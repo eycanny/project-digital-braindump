@@ -2,25 +2,41 @@
 {% block title %}{{user.username}}'s Notes{% endblock %}
 
 {% block body %}
-  <section id="user-options">
-    <!-- Feature: Keyword Search -->
-    <form action="/search" id="search-option">
-      <input type="text" name="search">
-      <input type="submit" value="Search Keyword" id="search-button">
-    </form>
-
-    <!-- Feature: Sort Filters -->
-    <form action="/sort-by" id="sort-option">
-      <select name="sort-by" id="sort-by-select">
-        <option value="title-asc">Title, ascending</option>
-        <option value="title-desc">Title, descending</option>
-        <option value="date-created-asc">Date Created, old to new</option>
-        <option value="date-created-desc">Date Created, new to old</option>
-        <option value="date-modified-asc">Date Modified, old to new</option>
-        <option value="date-modified-desc">Date Modified, new to old</option>
-      </select>
-      <button type="submit">Sort</button>
-    </form>
+  <div class="row" id="user-options">
+    <div class="row">
+      <!-- <div class="col-9" id="search-col" align="right"> -->
+        <!-- Feature: Keyword Search -->
+        <!-- <form action="/search" id="search-option">
+            <input class="form-control form-control-sm" type="search" name="search" id="search-bar">
+            <div class="input-group-append">
+              <button id="search-button">Seach Keyword</button>
+            </div>
+        </form>
+      </div> -->
+      <!-- Feature: Keyword Search -->
+      <form action="/search" id="search-option">
+        <div class="col-9 input-group mb-3" id="search-col">
+          <input type="search" class="form-control" name="search" id="search-bar">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="search-button">Seach Keyword</button>
+          </div>
+        </div>
+      </form>
+      <div class="col-3" id="sort-col" align="right">
+        <!-- Feature: Sort Filters -->
+        <form action="/sort-by" id="sort-option">
+            <select class="custom-select" name="sort-by" id="sort-by-select">
+              <option value="title-asc">Title, ascending</option>
+              <option value="title-desc">Title, descending</option>
+              <option value="date-created-asc">Date Created, old to new</option>
+              <option value="date-created-desc">Date Created, new to old</option>
+              <option value="date-modified-asc">Date Modified, old to new</option>
+              <option value="date-modified-desc">Date Modified, new to old</option>
+            </select>
+          <button type="submit">Sort</button>
+        </form>
+      </div>
+    </div>
 
     <!-- Feature: Note Creation Modal -->
     <button id="create-note-button">Create a Note</button>
@@ -58,7 +74,7 @@
     <form action="/logout" id="logout-option">
       <input type="submit" value="Log Out" id="logout-button">
     </form> 
-  </section>
+  </div>
 
   <section id="note-container">
     {% for note in notes %}
