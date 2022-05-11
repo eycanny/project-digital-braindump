@@ -47,7 +47,7 @@ def create_account():
     username_check = crud.get_user_by_username(username)
 
     if user:
-        flash("Cannot create an account with that email. Try again.")
+        flash("An account is already associated with that email. Try again.")
 
     elif username_check:
         flash("That username is taken. Try again.")
@@ -56,7 +56,7 @@ def create_account():
         user = crud.create_user(email=email, password=password, username=username)
         db.session.add(user)
         db.session.commit()
-        flash("Account created! Please log in.")
+        flash("Account successfully created! Please log in.")
 
     return redirect("/")
 
@@ -72,11 +72,11 @@ def process_login():
 
     user = crud.get_user_by_email(email)
     if not user or user.password != password:
-        flash("The email or password you entered was incorrect.")
+        flash("The email or password you entered was incorrect. Try again.")
         return redirect("/")
     else:
         session["user_email"] = user.email
-        flash(f"Welcome back, {user.username}.")
+        flash(f"Logged in account successfully. Welcome back, {user.username}.")
         return redirect("/notes")
 
 
@@ -224,7 +224,7 @@ def delete_note(note_id):
     db.session.delete(note)
     db.session.commit()
 
-    flash("Note has been deleted.")
+    flash("Note has been successfully deleted.")
     return redirect("/notes")
 ##############################################################################
 

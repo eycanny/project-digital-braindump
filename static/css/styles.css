@@ -13,8 +13,13 @@ body {
     background-color: rgba(23, 195, 178, 0.1);
     color: rgb(34, 124, 157);
 }
+
 .text-center {
     text-align: center;
+}
+
+#affirmation {
+    margin: 10px;
 }
 
 /* Homepage */
@@ -30,6 +35,7 @@ body {
 
 #account-info-box {
     border:solid #227C9D;
+    background-color: rgb(254,249,239, 0.6);
     padding: 12px;
 }
 

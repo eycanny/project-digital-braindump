@@ -16,7 +16,7 @@ loginButton.addEventListener('click', (evt) => {
       <table>
         <tr>
           <td><label for="email"><strong>Email</strong></label></td>
-          <td><input type="text" name="email"></td>
+          <td><input type="email" name="email"></td>
         </tr>
         <tr>
           <td><label for="password"><strong>Password</strong></label></td>
@@ -47,7 +47,7 @@ createAccountButton.addEventListener('click', (evt) => {
         </tr>
         <tr>
           <td><label for="email"><strong>Email</strong></label></td>
-          <td><input type="text" name="email"></td>
+          <td><input type="email" name="email"></td>
         </tr>
         <tr>
           <td><label for="password"><strong>Password</strong></label></td>
