@@ -85,6 +85,7 @@ def process_logout():
     """Process user logout."""
 
     session["user_email"] = None
+    flash("Logged out of account successfully.")
 
     return redirect("/")
 
