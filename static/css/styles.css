@@ -28,6 +28,7 @@ button {
     color: rgb(254,249,239);
 }
 
+
 /* Homepage */
 .homepage-btn {
     border: none;
@@ -52,9 +53,13 @@ table {
 /* Notes page */
 
 /* Overrides Bootstrap's color for buttons */
-.note-btn {
+.option-btn {
     background-color: rgba(34,124,157, 0.6);
     color: rgb(254,249,239);
+}
+
+#logout-button {
+    background-color: rgba(254, 109, 115, 0.8);
 }
 
 /* For note buttons */
@@ -62,12 +67,18 @@ table {
     border-radius: 4px;
     margin-top: 25px;
     margin-bottom: 0px;
+    width: 100%;
 }
 
 /* For images within a note displayed on notes page */
 .img-page {
     width: 100px;
     height: 100px;
+}
+
+.note-text {
+    inline-size: 100%;
+    overflow-wrap: break-word;
 }
 /* Modal */
 

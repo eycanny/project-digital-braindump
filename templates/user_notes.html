@@ -4,28 +4,29 @@
 {% block body %}
   <div class="row" id="user-options">
     <div class="row">
-      <div class="col-1"></div>
-      <div class="col-8" id="search-col">
+      <div class="col-2"></div>
+      <div class="col-7" id="search-col">
         <!-- Feature: Keyword Search -->
         <form action="/search" id="search-option">
           <div class="input-group mb-3">
             <input class="form-control" type="search" name="search" id="search-bar">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary note-btn" id="search-button">Seach Keyword</button>
+              <button class="btn btn-outline-secondary option-btn" id="search-button">Seach Keyword</button>
             </div>
           </div>
         </form>
       </div>
+      <div class="col-1"></div>
       <div class="col">
         <form action="/logout" id="logout-option">
-          <button class="btn btn-outline-secondary note-btn" type="submit" id="logout-button">Log Out</button>
+          <button class="btn btn-outline-secondary option-btn" type="submit" id="logout-button">Log Out</button>
         </form>
       </div>
     </div>
     <div class="row">
-      <div class="col" align="right">
+      <div class="col-sm-12 col-md-6" align="right">
         <!-- Feature: Note Creation Modal -->
-        <button class="btn btn-outline-secondary note-btn" id="create-note-button">Create a Note</button>
+        <button class="btn btn-outline-secondary option-btn" id="create-note-button">Create a Note</button>
 
         <div class="modal-box" id="modal-box">
           <form action="/create-note" method="POST" enctype="multipart/form-data">
@@ -57,7 +58,7 @@
           </form>
         </div>
       </div>
-      <div class="col" id="sort-col">
+      <div class="col-sm-12 col-md-6" id="sort-col">
         <!-- Feature: Sort Filters -->
         <form action="/sort-by" id="sort-option">
           <div class="input-group">
@@ -70,7 +71,7 @@
               <option value="date-modified-desc">Date Modified, new to old</option>
             </select>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary note-btn" id="sort-button">Sort</button>
+              <button class="btn btn-outline-secondary option-btn" id="sort-button">Sort</button>
             </div>
           </div>
         </form>
@@ -79,20 +80,20 @@
   </div>
 
   <section id="note-container">
-    <div class="row" align="center">
+    <div class="row">
       {% for note in notes %}
-      <div class="col-3">
+      <div class="col-sm-6 col-md-4 col-lg-3">
         <form action="/notes/{{ note.note_id }}">
         <button class="note">
           {% if note.title %}
-            <h2>{{ note.title }}</h2>
+            <h2 class="note-text">{{ note.title }}</h2>
           {% endif %}
 
           {% if note.body %}
             {% if "/digitalbraindump/image/upload/" in note.body %}
               <img class="img-page" src="{{ note.body }}"></img>
             {% else %}
-              <p>{{ note.body }}</p>
+              <p class="note-text">{{ note.body }}</p>
             {% endif %}
           {% endif %}
 
