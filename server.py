@@ -149,6 +149,42 @@ def view_notes_by_keyword():
     return render_template("user_notes.html", notes=notes, user=user)
 
 
+@app.route("/sort-by")
+def sort_notes():
+    """Return notes sorted by user's selected value."""
+
+    session["user_email"] = session.get("user_email")
+
+    if session["user_email"] == None:
+        flash("You must be logged in to view your notes.")
+        return redirect("/")
+
+    user_email = session["user_email"]
+    user = crud.get_user_by_email(user_email)
+
+    sorting_choice = request.args.get("sort-by")
+
+    if sorting_choice == "title-asc":
+        notes = crud.sort_note_by_title_asc(user.user_id)
+
+    elif sorting_choice == "title-desc":
+        notes = crud.sort_note_by_title_desc(user.user_id)
+    
+    elif sorting_choice == "date-created-asc":
+        notes = crud.sort_note_by_date_created_asc(user.user_id)
+
+    elif sorting_choice == "date-created-desc":
+        notes = crud.sort_note_by_date_created_desc(user.user_id)
+    
+    elif sorting_choice == "date-modified-asc":
+        notes = crud.sort_note_by_date_modified_asc(user.user_id)
+
+    elif sorting_choice == "date-modified-desc":
+        notes = crud.sort_note_by_date_modified_desc(user.user_id)
+    
+    return render_template("user_notes.html", notes=notes, user=user)
+
+
 #-----------------------------------------------------------------------------#
 #--------------------- Note Creating/Editing Functions -----------------------#
 #-----------------------------------------------------------------------------#
@@ -224,48 +260,11 @@ def delete_note(note_id):
 
     flash("Note has been successfully deleted.")
     return redirect("/notes")
-##############################################################################
 
-### Extra Note Functions ###
 
-@app.route("/sort-by")
-def sort_notes():
-    """Return notes sorted by user's selected value."""
-
-    session["user_email"] = session.get("user_email")
-
-    if session["user_email"] == None:
-        flash("You must be logged in to view your notes.")
-        return redirect("/")
-
-    user_email = session["user_email"]
-    user = crud.get_user_by_email(user_email)
-
-    sorting_choice = request.args.get("sort-by")
-
-    if sorting_choice == "title-asc":
-        notes = crud.sort_note_by_title_asc(user.user_id)
-
-    elif sorting_choice == "title-desc":
-        notes = crud.sort_note_by_title_desc(user.user_id)
-    
-    elif sorting_choice == "date-created-asc":
-        notes = crud.sort_note_by_date_created_asc(user.user_id)
-
-    elif sorting_choice == "date-created-desc":
-        notes = crud.sort_note_by_date_created_desc(user.user_id)
-    
-    elif sorting_choice == "date-modified-asc":
-        notes = crud.sort_note_by_date_modified_asc(user.user_id)
-
-    elif sorting_choice == "date-modified-desc":
-        notes = crud.sort_note_by_date_modified_desc(user.user_id)
-    
-    return render_template("user_notes.html", notes=notes, user=user)
-
-##############################################################################
-
-### Logic Functions ###
+#-----------------------------------------------------------------------------#
+#----------------------------- Logic Functions -------------------------------#
+#-----------------------------------------------------------------------------#
 
 def modify_note(note):
     """Modify a note."""
@@ -324,6 +323,7 @@ def upload_to_cloudinary():
     return image_uploads
 
 
+#-----------------------------------------------------------------------------#
 if __name__ == "__main__":
     connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
