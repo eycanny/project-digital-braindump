@@ -1,6 +1,6 @@
 """Server for note-taking app."""
 
-from flask import Flask, render_template, request, flash, session, redirect, jsonify
+from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 from datetime import datetime
 import crud
@@ -19,9 +19,10 @@ CLOUDINARY_CLOUD_NAME = os.environ['CLOUDINARY_CLOUD_NAME']
 CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
 CLOUDINARY_API_SECRET = os.environ['CLOUDINARY_API_SECRET']
 
-##############################################################################
+#-----------------------------------------------------------------------------#
+#---------------------------- Homepage Functions -----------------------------#
+#-----------------------------------------------------------------------------#
 
-### Homepage, Login/Logout, Cancel ###
 @app.route("/")
 def view_homepage():
     """View homepage."""
@@ -37,7 +38,7 @@ def view_homepage():
 
 @app.route("/users", methods=["POST"])
 def create_account():
-    """Create a new account for user."""
+    """Create a user account."""
 
     username = request.form.get("username")
     email = request.form.get("email")
@@ -69,8 +70,8 @@ def process_login():
 
     email = request.form.get("email")
     password = request.form.get("password")
-
     user = crud.get_user_by_email(email)
+
     if not user or user.password != password:
         flash("The email or password you entered was incorrect. Try again.")
         return redirect("/")
@@ -90,52 +91,13 @@ def process_logout():
     return redirect("/")
 
 
-@app.route("/cancel")
-def cancel_process():
-    """Cancel whatever user was doing and return them to the notes page."""
+#-----------------------------------------------------------------------------#
+#-------------------------- Note Viewing Functions ---------------------------#
+#-----------------------------------------------------------------------------#
 
-    return redirect("/notes")
-
-
-##############################################################################
-
-### Create Note ###
-
-@app.route("/create-note", methods=["POST"])
-def create_note():
-    """Create a note."""
-
-    title = request.form.get("title")
-    body = request.form.get("body")
-    user = crud.get_user_by_email(session["user_email"])
-    image = None
-
-    if title == "":
-        title = "(No Title)"
-
-    if body == "":
-        body = "(No Body)"
-
-    images = upload_to_cloudinary()
-
-    if (images["note_image"] != None) and (type(images["note_image"]) == str):
-        body = images["note_image"]
-
-    if (images["note_attachment"] != None) and (type(images["note_attachment"]) == str):
-        image = images["note_attachment"]
-    
-    new_note = crud.create_note(user, title, body, image)
-    db.session.add(new_note)
-    db.session.commit()
-
-    return redirect("/notes")
-
-##############################################################################
-
-### View Note ###
 @app.route("/notes")
 def view_notes():
-    """Show notes of user."""
+    """Show all notes created by user."""
 
     session["user_email"] = session.get("user_email")
 
@@ -149,7 +111,7 @@ def view_notes():
     return render_template("user_notes.html", notes=notes, user=user)
 
 
-@app.route("/notes/<note_id>")
+@app.route("/view-note/<note_id>")
 def view_note(note_id):
     """Show a note."""
 
@@ -184,12 +146,44 @@ def view_notes_by_keyword():
 
     notes = crud.get_note_by_keyword(keyword, user.user_id)
 
-    return render_template("user_notes.html", notes=notes, user=user) 
+    return render_template("user_notes.html", notes=notes, user=user)
 
-##############################################################################
 
-### Edit Note ###
-@app.route("/notes/<note_id>/edit")
+#-----------------------------------------------------------------------------#
+#--------------------- Note Creating/Editing Functions -----------------------#
+#-----------------------------------------------------------------------------#
+
+@app.route("/create-note", methods=["POST"])
+def create_note():
+    """Create a note."""
+
+    title = request.form.get("title")
+    body = request.form.get("body")
+    user = crud.get_user_by_email(session["user_email"])
+    image = None
+
+    if title == "":
+        title = "(No Title)"
+
+    if body == "":
+        body = "(No Body)"
+
+    images = upload_to_cloudinary()
+
+    if (images["note_image"] != None) and (type(images["note_image"]) == str):
+        body = images["note_image"]
+
+    if (images["note_attachment"] != None) and (type(images["note_attachment"]) == str):
+        image = images["note_attachment"]
+    
+    new_note = crud.create_note(user, title, body, image)
+    db.session.add(new_note)
+    db.session.commit()
+
+    return redirect("/notes")
+
+
+@app.route("/edit-note/<note_id>/")
 def open_editor(note_id):
     """Open note editor to edit a note."""
 
@@ -205,9 +199,9 @@ def open_editor(note_id):
     return render_template("note_editor.html", note=note)
 
 
-@app.route("/edit-note/<note_id>", methods=["POST"])
-def edit_note(note_id):
-    """Edit a note."""
+@app.route("/save-note/<note_id>", methods=["POST"])
+def save_note(note_id):
+    """Save a note after editing."""
 
     user = crud.get_user_by_email(session["user_email"])
     note = crud.get_note_by_id(note_id=note_id, user_id=user.user_id)
@@ -215,7 +209,7 @@ def edit_note(note_id):
     note = modify_note(note)
     db.session.commit()
 
-    return redirect(f"/notes/{note_id}")
+    return redirect(f"/view-note/{note_id}")
 
 
 @app.route("/delete-note/<note_id>", methods=["POST"])
@@ -248,7 +242,6 @@ def sort_notes():
     user = crud.get_user_by_email(user_email)
 
     sorting_choice = request.args.get("sort-by")
-    print(sorting_choice)
 
     if sorting_choice == "title-asc":
         notes = crud.sort_note_by_title_asc(user.user_id)
@@ -281,6 +274,12 @@ def modify_note(note):
     new_body = request.form.get("body")
     date_modified = datetime.now().strftime("%m-%d-%Y %H:%M:%S")
     new_image = note.image
+
+    if not new_title:
+        new_title = "(No Title)"
+
+    if not new_body:
+        new_body = "(No Body)"
 
     images = upload_to_cloudinary()
 

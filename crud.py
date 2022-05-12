@@ -46,14 +46,6 @@ def create_note(user, title, body, image):
     return note
 
 
-def delete_note(note_id):
-    """Delete a note."""
-
-    #User clicks on delete button
-    #Alert box pops up
-    #User confirms or denies proceeding with delete
-
-
 def get_note_by_user(user_id):
     """Return notes by user id."""
 
