@@ -57,6 +57,18 @@ table {
     color: rgb(254,249,239);
 }
 
+/* For note buttons */
+.note {
+    border-radius: 4px;
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+/* For images within a note displayed on notes page */
+.img-page {
+    width: 100px;
+    height: 100px;
+}
 /* Modal */
 
 .modal-box {

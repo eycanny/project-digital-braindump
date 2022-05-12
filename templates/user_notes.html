@@ -79,27 +79,31 @@
   </div>
 
   <section id="note-container">
-    {% for note in notes %}
-    <form action="/notes/{{ note.note_id }}" class="note">
-    <button>
-      {% if note.title %}
-        <h2>{{ note.title }}</h2>
-      {% endif %}
+    <div class="row" align="center">
+      {% for note in notes %}
+      <div class="col-3">
+        <form action="/notes/{{ note.note_id }}">
+        <button class="note">
+          {% if note.title %}
+            <h2>{{ note.title }}</h2>
+          {% endif %}
 
-      {% if note.body %}
-        {% if "/digitalbraindump/image/upload/" in note.body %}
-          <img src="{{ note.body}}"></img>
-        {% else %}
-          <p>{{ note.body }}</p>
-        {% endif %}
-      {% endif %}
+          {% if note.body %}
+            {% if "/digitalbraindump/image/upload/" in note.body %}
+              <img class="img-page" src="{{ note.body }}"></img>
+            {% else %}
+              <p>{{ note.body }}</p>
+            {% endif %}
+          {% endif %}
 
-      {% if note.image %}
-        <img src="{{ note.image }}"></img>
-      {% endif %}
-    </button>
-    </form>
-    {% endfor %}
+          {% if note.image %}
+            <img class="img-page" src="{{ note.image }}"></img>
+          {% endif %}
+        </button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
   </section>
 {% endblock %}
 
