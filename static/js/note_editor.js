@@ -1,5 +1,7 @@
 'use strict';
 
+
+// Feature: Delays deletion of note until user confirms they want note deleted
 const deleteButton = document.querySelector('#delete-button');
 
 deleteButton.addEventListener('click', (evt) => {

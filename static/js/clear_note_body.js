@@ -1,5 +1,6 @@
 'use strict';
 
+// Feature: Clear note's body of any text or images
 const clearNoteBodyButton = document.querySelector('#clear-body-btn');
 const noteBody = document.querySelector('#note-body');
 

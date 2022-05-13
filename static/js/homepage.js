@@ -1,9 +1,12 @@
 'use strict';
 
+
+
 const loginButton = document.querySelector('#login-btn');
 const createAccountButton = document.querySelector('#create-acct-btn');
 const accountBox = document.querySelector('#account-info-box');
 
+//Feature: Changes to a box for logging in upon clicking button
 loginButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
@@ -31,6 +34,8 @@ loginButton.addEventListener('click', (evt) => {
 
 })
 
+
+//Feature: Changes to a box for creating an account upon clicking button
 createAccountButton.addEventListener('click', (evt) => {
   evt.preventDefault();
 
