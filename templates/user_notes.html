@@ -89,14 +89,14 @@
         <form action="/view-note/{{ note.note_id }}">
         <button class="note">
           {% if note.title %}
-            <h2 class="note-text">{{ note.title }}</h2>
+            <h2 class="note-title">{{ note.title }}</h2>
           {% endif %}
 
           {% if note.body %}
             {% if "/digitalbraindump/image/upload/" in note.body %}
-              <img class="img-page" src="{{ note.body }}"></img>
+              <p><img class="img-page" src="{{ note.body }}"></img></p>
             {% else %}
-              <p class="note-text">{{ note.body }}</p>
+              <p class="note-body">{{ note.body }}</p>
             {% endif %}
           {% endif %}
 

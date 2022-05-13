@@ -76,10 +76,17 @@ table {
     height: 100px;
 }
 
-.note-text {
+.note-title {
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+}
+
+.note-body {
     inline-size: 100%;
     overflow-wrap: break-word;
 }
+
 /* Modal */
 
 .modal-box {
