@@ -1,6 +1,7 @@
 certifi==2021.10.8
 click==8.1.2
 cloudinary==1.29.0
+Faker==13.11.0
 Flask==2.1.1
 Flask-SQLAlchemy==2.5.1
 greenlet==1.1.2
@@ -9,6 +10,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.1
 MarkupSafe==2.1.1
 psycopg2-binary==2.9.3
+python-dateutil==2.8.2
 six==1.16.0
 SQLAlchemy==1.4.35
 urllib3==1.26.9
