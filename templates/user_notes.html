@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-12 col-md-6 " align="right">
+      <div class="col-sm-12 col-md-6" align="right">
         <!-- Feature: Note Creation Modal -->
         <button class="btn btn-outline-secondary option-btn" id="create-note-button">Create a Note</button>
 
@@ -81,6 +81,9 @@
 
   <section id="note-container">
     <div class="row">
+      {% if not notes %}
+      <p align="center" style="margin-top: 25px"><em>You currently have no notes.</em></p>
+      {% endif %}
       {% for note in notes %}
       <div class="col-sm-6 col-md-4 col-lg-3">
         <form action="/view-note/{{ note.note_id }}">
