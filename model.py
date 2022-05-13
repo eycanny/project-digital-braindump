@@ -17,7 +17,7 @@ class User(db.Model):
     password = db.Column(db.String, nullable = False)
 
     #2.0
-    username = db.Column(db.String(20), unique = True, nullable = False)
+    username = db.Column(db.String, unique = True, nullable = False)
 
     notes = db.relationship("Note", back_populates = "user")
 
@@ -32,7 +32,7 @@ class Note(db.Model):
 
     #MVP
     note_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    title = db.Column(db.String(60))
+    title = db.Column(db.String)
     body = db.Column(db.Text)
     date_created = db.Column(db.DateTime, nullable = False)
     date_modified = db.Column(db.DateTime, nullable = True)
