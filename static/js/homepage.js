@@ -28,7 +28,7 @@ loginButton.addEventListener('click', (evt) => {
       </table>
 
       <p>
-        <input type="submit">
+        <button class="btn btn-outline-secondary option-btn" type="submit">Submit</button>
       </p>
   </form>`;
 
@@ -61,7 +61,7 @@ createAccountButton.addEventListener('click', (evt) => {
       </table>
 
       <p>
-        <input type="submit">
+        <button class="btn btn-outline-secondary option-btn" type="submit">Submit</button>
       </p>
   </form>`;
 

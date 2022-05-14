@@ -28,6 +28,9 @@ button {
     color: rgb(254,249,239);
 }
 
+#they-said-so {
+    margin: 15px;
+}
 
 /* Homepage */
 .homepage-btn {
@@ -68,6 +71,7 @@ table {
     margin-top: 25px;
     margin-bottom: 0px;
     width: 100%;
+    height: 285px;
 }
 
 /* For images within a note displayed on notes page */
@@ -77,6 +81,7 @@ table {
 }
 
 .note-title {
+    inline-size: 100%;
     overflow: hidden;
     max-width: 100%;
     text-overflow: ellipsis;
@@ -85,6 +90,8 @@ table {
 .note-body {
     inline-size: 100%;
     overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Modal */
