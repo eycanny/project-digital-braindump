@@ -11,6 +11,6 @@ deleteButton.addEventListener('click', (evt) => {
     .querySelector("#delete-confirm")
     .innerHTML = `Are you sure that you want to delete this note? Once deleted, the note can't be restored.
       <br/>
-      <input type="submit" value="Click Again to Confirm Delete">`
+      <button class="btn btn-outline-secondary option-btn" id="confirm-delete-btn">Click Again to Confirm Delete</button>`
 
 })

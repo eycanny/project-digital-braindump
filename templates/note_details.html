@@ -2,42 +2,56 @@
 {% block title %}Note Details{% endblock %}
 
 {% block body %}
-<section class="title">
-    <h3>Title</h3>
-        <p>{{ note.title }}</p>
-</section>
+<div class="row">
+    <div class="col details">
+        <h3 class="details-header">TITLE</h3>
+            <p>{{ note.title }}</p>
+    </div>
+</div>
 
-<section class="body">
-    <h3>Body</h3>
-    {% if note.body %}
-        {% if "/digitalbraindump/image/upload/" in note.body %}
-            <img src="{{ note.body}}"></img>
-        {% else %}
-            <p>{{ note.body }}</p>
+<div class="row">
+    <div class="col details">
+        <h3 class="details-header">BODY</h3>
+        {% if note.body %}
+            {% if "/digitalbraindump/image/upload/" in note.body %}
+                <img src="{{ note.body}}"></img>
+            {% else %}
+                <p>{{ note.body }}</p>
+            {% endif %}
         {% endif %}
-    {% endif %}
-</section>
+    </div>
+</div>
 
 {% if note.image %}
-<section class="image">
-    <h3>Image Attachment</h3>
-    <img src="{{ note.image }}"></img>
-</section>
+<div class="row">
+    <div class="col details">
+        <h3 class="details-header">IMAGE ATTACHMENT</h3>
+        <img src="{{ note.image }}"></img>
+    </div>
+</div>
 {% endif %}
 
-<section class="note-options">
-    <form action="/notes">
-        <input type="submit" value="Return to Notes">
-    </form>
-
-    <form action="/edit-note/{{ note.note_id }}">
-        <input type="submit" value="Edit Note">
-    </form>
-
-    <form action="/delete-note/{{ note.note_id }}" method="POST" id="delete-confirm">
-        <input type="submit" value="Delete Note" id="delete-button">
-    </form>
-</section>
+<div class="row justify-content-center details">
+    <div class="col" align="center">
+        <form action="/notes">
+            <button class="btn btn-outline-secondary option-btn">Return to Notes</button>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center details">
+    <div class="col" align="center">
+        <form action="/edit-note/{{ note.note_id }}">
+            <button class="btn btn-outline-secondary option-btn">Edit Note</button>
+        </form>
+    </div>
+</div>
+<div class="row justify-content-center details">
+    <div class="col" align="center">
+        <form action="/delete-note/{{ note.note_id }}" method="POST" id="delete-confirm">
+            <button class="btn btn-outline-secondary option-btn" id="delete-button">Delete Note</button>
+        </form>
+    </div>
+</div>
 {% endblock %}
 
 {% block js %}<script src="/static/js/note_editor.js"></script>{% endblock %}

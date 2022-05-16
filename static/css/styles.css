@@ -14,8 +14,13 @@ body {
     color: rgb(34, 124, 157);
 }
 
+h1 h2 h3 h4 h5 {
+    font-family: 'Lato', sans-serif;
+}
+
 p {
     margin: 0;
+    font-family: 'Merriweather', serif;
 }
 
 #affirmation {
@@ -169,4 +174,28 @@ button.save {
 button.cancel {
     background-color: rgb(34, 124, 157);
     color: rgb(254,249,239);
+}
+
+/* Note details page */
+
+.details {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.details img {
+    max-width: 400px;
+}
+
+.details button {
+    width: 150px;
+}
+
+#delete-button {
+    background-color: rgba(254, 109, 115, 0.8);
+}
+
+#confirm-delete-btn {
+    background-color: rgba(254, 109, 115, 0.8);
+    width: 250px;
 }
