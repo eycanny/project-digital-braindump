@@ -32,16 +32,16 @@
           <form action="/create-note" method="POST" enctype="multipart/form-data">
             <div class="modal-content" id="modal-content" align="left">
               <div class="modal-header">
-                <h2>Create a Note</h2>
+                <h2>CREATE NOTE</h2>
               </div>
               <div class="modal-body">
                 <p>
                     Title<br/>
-                    <input type='text' name="title">
+                    <input class="modal-title" type="text" name="title">
                 </p>
                 <p id="note-body">
                     Body<br/>
-                    <textarea type="text" name="body" id="text-body" style="width: 100%"></textarea>
+                    <textarea class="modal-text-body" type="text" name="body" id="text-body"></textarea>
                 </p>
                 <p id="image-note-upload"></p>
                 <p id="image-attachment-upload"></p>
@@ -71,7 +71,7 @@
               <option value="date-modified-desc">Date Modified, new to old</option>
             </select>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary option-btn" id="sort-button">Sort</button>
+              <button class="btn btn-outline-secondary option-btn" id="sort-button" style="z-index: 0;">Sort</button>
             </div>
           </div>
         </form>
@@ -101,7 +101,7 @@
           {% endif %}
 
           {% if note.image %}
-            <img class="img-page" src="{{ note.image }}"></img>
+            <p><img class="img-page" src="{{ note.image }}"></img></p>
           {% endif %}
         </button>
         </form>
