@@ -3,28 +3,29 @@
 
 {% block before_quote %}
   <div class="col text-center">
-    <h1>Welcome to the Digital Braindump!</h1>
+    <h1 id="welcome-msg">Welcome to the Digital Braindump!</h1>
   </div>
 {% endblock %}
 
 {% block body %}
+<div class="col"></div>
+<div class="col">
   <div class="row">
-    <div class="col" align="right">
-      <button class="homepage-btn btn-sm" type="button" id="login-btn">Log In</button>
+    <div class="col homepage-col">
+      <button class="homepage-btn btn-sm" type="button" id="login-btn">LOG IN</button>
     </div>
-    <div class="col" align="left">
-      <button class="homepage-btn btn-sm" type="button" id="create-acct-btn" style="background-color: rgba(34,124,157, 0.2)">Create Account</button>
+    <div class="col homepage-col">
+      <button class="homepage-btn btn-sm" type="button" id="create-acct-btn" style="background-color: rgba(34,124,157, 0.2)">CREATE ACCOUNT</button>
     </div>
   </div>
   <div class="row">
-    <div class="col"></div>
     <div class="col" id="account-info-box" align="center">
       <form action="/login" method="POST">
         <h5><strong>Log into Account</strong></h5>
           <table>
             <tr>
               <td><label for="email"><strong>Email</strong></label></td>
-              <td><input type="text" name="email"></td>
+              <td><input type="email" name="email"></td>
             </tr>
             <tr>
               <td><label for="password"><strong>Password</strong></label></td>
@@ -33,12 +34,13 @@
           </table>
     
           <p>
-            <button class="btn btn-outline-secondary option-btn" type="submit">Submit</button>
+            <button class="btn btn-outline-secondary option-btn" type="submit">SIGN IN</button>
           </p>
       </form>
     </div>
-    <div class="col"></div>
   </div>
+</div>
+<div class="col"></div>
 {% endblock %}
 
 {% block js %}

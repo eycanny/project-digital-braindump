@@ -20,6 +20,7 @@ body {
 
 #affirmation {
     margin: 10px;
+    font-family: 'Merriweather', serif;
 }
 
 button {
@@ -33,6 +34,15 @@ button {
 }
 
 /* Homepage */
+#welcome-msg {
+    font-family: 'Lato', sans-serif;
+}
+
+.homepage-col {
+    width: 100%;
+    padding: 0;
+}
+
 .homepage-btn {
     border: none;
     display: inline-block;
@@ -40,7 +50,7 @@ button {
     text-align: center;
     background-color: rgba(34,124,157, 0.6);
     color: rgb(254,249,239);
-    width: 200px;
+    width: 100%;
 }
 
 #account-info-box {
