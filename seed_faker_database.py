@@ -25,9 +25,9 @@ for n in range(5):
     model.db.session.add(user)
     model.db.session.commit()
     
-    for i in range(5):
+    for i in range(16):
 
-        note = crud.create_note(user, title = fake.text(max_nb_chars=60), body = fake.paragraph(nb_sentences=5), image = None)
+        note = crud.create_note(user, title = fake.text(max_nb_chars=60), body = fake.paragraph(nb_sentences=10), image = None)
         model.db.session.add(note)
 
 model.db.session.commit()
