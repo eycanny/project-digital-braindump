@@ -16,20 +16,17 @@ loginButton.addEventListener('click', (evt) => {
   accountBox.innerHTML =
   `<form action="/login" method="POST">
     <h5><strong>Log into Account</strong></h5>
-      <table>
-        <tr>
-          <td><label for="email"><strong>Email</strong></label></td>
-          <td><input type="email" name="email"></td>
-        </tr>
-        <tr>
-          <td><label for="password"><strong>Password</strong></label></td>
-          <td><input type="password" name="password"></td>
-        </tr>
-      </table>
-
-      <p>
-        <button class="btn btn-outline-secondary option-btn" type="submit">SIGN IN</button>
-      </p>
+    <table>
+      <tr>
+        <td><label for="email"><strong>Email</strong></label></td>
+        <td><input type="email" name="email"></td>
+      </tr>
+      <tr>
+        <td><label for="password"><strong>Password</strong></label></td>
+        <td><input type="password" name="password"></td>
+      </tr>
+    </table>
+    <button class="btn btn-outline-secondary option-btn" type="submit">SIGN IN</button>
   </form>`;
 
 })
@@ -45,24 +42,21 @@ createAccountButton.addEventListener('click', (evt) => {
   accountBox.innerHTML =
   `<form action="/users" method="POST">
     <h5><strong>Create an Account</strong></h5>
-      <table>
-        <tr>
-          <td><label for="username"><strong>Username</strong></label></td>
-          <td><input type="text" name="username"></td>
-        </tr>
-        <tr>
-          <td><label for="email"><strong>Email</strong></label></td>
-          <td><input type="email" name="email"></td>
-        </tr>
-        <tr>
-          <td><label for="password"><strong>Password</strong></label></td>
-          <td><input type="password" name="password"></td>
-        </tr>
-      </table>
-
-      <p>
-        <button class="btn btn-outline-secondary option-btn" type="submit">CREATE</button>
-      </p>
+    <table>
+      <tr>
+        <td><label for="username"><strong>Username</strong></label></td>
+        <td><input type="text" name="username"></td>
+      </tr>
+      <tr>
+        <td><label for="email"><strong>Email</strong></label></td>
+        <td><input type="email" name="email"></td>
+      </tr>
+      <tr>
+        <td><label for="password"><strong>Password</strong></label></td>
+        <td><input type="password" name="password"></td>
+      </tr>
+    </table>
+    <button class="btn btn-outline-secondary option-btn" type="submit">CREATE</button>
   </form>`;
 
 })

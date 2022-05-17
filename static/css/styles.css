@@ -28,7 +28,7 @@ img {
 }
 
 #affirmation {
-    margin: 10px;
+    margin: 15px;
     font-family: 'Merriweather', serif;
     font-weight: 700;
 }
@@ -43,9 +43,11 @@ button {
     margin: 15px;
 }
 
+
 /* Homepage */
 #welcome-msg {
     font-family: 'Lato', sans-serif;
+    margin: 15px;
 }
 
 .homepage-col {
