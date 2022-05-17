@@ -2,10 +2,9 @@
 {% block title %}{{user.username}}'s Notes{% endblock %}
 
 {% block body %}
-  <div class="row" id="user-options">
+  <div class="row" id="user-options" style="padding-right: 0">
     <div class="row">
-      <div class="col-2"></div>
-      <div class="col-7" id="search-col">
+      <div class="col-12 col-md-7 offset-md-2" id="search-col">
         <!-- Feature: Keyword Search -->
         <form action="/search" id="search-option">
           <div class="input-group mb-3">
@@ -16,15 +15,14 @@
           </div>
         </form>
       </div>
-      <div class="col-1"></div>
-      <div class="col">
+      <div class="col-12 col-md-2" align="center">
         <form action="/logout" id="logout-option">
           <button class="btn btn-outline-secondary option-btn" type="submit" id="logout-button">Log Out</button>
         </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-12 col-md-6" align="right">
+    <div class="row" align="center">
+      <div class="col-12 order-2 col-md-2 offset-md-4 order-md-1 align-self-center">
         <!-- Feature: Note Creation Modal -->
         <button class="btn btn-outline-secondary option-btn" id="create-note-button">Create a Note</button>
 
@@ -58,7 +56,7 @@
           </form>
         </div>
       </div>
-      <div class="col-sm-12 col-md-6" id="sort-col">
+      <div class="col-10 offset-2 order-1 col-md-6 offset-md-0 order-md-2" id="sort-col" style="margin-top: 15px; margin-bottom: 15px;">
         <!-- Feature: Sort Filters -->
         <form action="/sort-by" id="sort-option">
           <div class="input-group">
