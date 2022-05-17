@@ -18,7 +18,7 @@
                     <h5 style="margin-bottom: 0px;">BODY</h5>
                 </div>
                 <div class="col details" align="right">
-                    <button class="btn btn-outline-secondary option-btn" id="clear-body-btn">CLEAR BODY</button>
+                    <button class="btn btn-outline-secondary option-btn" id="clear-body-btn">Clear Body</button>
                 </div>
             </div>
             <p id="note-body">
@@ -29,8 +29,10 @@
                 {% else %}
                 <textarea type="text" name="body" id="text-body" style="height: 450px; width: 100%">{{ note.body }}</textarea>
                 {% endif %}    
-            <p id="image-note-upload"></p>
-            <p align="right"><button class="btn btn-outline-secondary option-btn" id="image-note-btn">Upload Image as Note</button></p>
+                <p id="image-note-upload"></p>
+                <div class="col details" align="right">
+                    <button class="btn btn-outline-secondary option-btn" id="image-note-btn" style="width: 200px">Upload Image as Note</button>
+                </div>
             </p>
 
             {% if note.image %}
@@ -39,16 +41,17 @@
             {% endif %}
         
             <p id="image-attachment-upload"></p>
-            <p>
-                <button id="image-note-btn">Upload Image as Note</button>
-                <button id="image-attachment-btn">Attach Image to Note</button>
-            </p>
-            <p>
-                <input type="submit" value="Save">
-            </p>
+            <div class="col details" align="right">
+                <button class="btn btn-outline-secondary option-btn" id="image-attachment-btn" style="width: 200px">Attach Image to Note</button>
+            </div>
+            <div class="col details" align="center">
+                <button class="btn btn-outline-secondary option-btn">SAVE</button>
+            </div>
         </form>
         <form action="/view-note/{{ note.note_id }}">
-            <input type="submit" value="Cancel">
+            <div class="col details" align="center">
+                <button class="btn btn-outline-secondary option-btn">CANCEL</button>
+            </div>
         </form>
     </div>
     <div class="col-1"></div>
