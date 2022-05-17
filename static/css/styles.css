@@ -23,6 +23,10 @@ p {
     font-family: 'Merriweather', serif;
 }
 
+img {
+    max-width: 400px;
+}
+
 #affirmation {
     margin: 10px;
     font-family: 'Merriweather', serif;
@@ -183,10 +187,6 @@ button.cancel {
     margin-bottom: 10px;
 }
 
-.details img {
-    max-width: 400px;
-}
-
 .details button {
     width: 150px;
 }
@@ -198,4 +198,24 @@ button.cancel {
 #confirm-delete-btn {
     background-color: rgba(254, 109, 115, 0.8);
     width: 250px;
+}
+
+/* Note editor page */
+#clear-body-btn {
+    background-color: rgba(254, 109, 115, 0.8);
+}
+
+#note-body {
+    padding: 0;
+}
+
+/* Modal + Note Editor */
+#image-note-upload {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#image-attachment-upload {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }

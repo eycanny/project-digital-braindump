@@ -1,46 +1,59 @@
 {% extends 'base.html' %}
 {% block title %}Note Editor{% endblock %}
 
-{% block quote %}{% endblock %}
 {% block body %}
-    <h2>Edit Note</h2>
-    <form action="/save-note/{{ note.note_id }}" method="POST" enctype="multipart/form-data">
-        <p>
-            Title<br/>
-            <input type='text' name="title" value="{{ note.title }}">
-        </p>
+<div class="row">
+    <div class="col" align="center">
+        <h2 style="margin-top: 15px; margin-bottom: 15px;">EDIT NOTE</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col">
+        <form action="/save-note/{{ note.note_id }}" method="POST" enctype="multipart/form-data">
+            <h5 class="details">TITLE</h5>
+                <input class="details" type='text' name="title" value="{{ note.title }}" style="width: 100%">
+            <div class="row align-items-center">
+                <div class="col details">
+                    <h5 style="margin-bottom: 0px;">BODY</h5>
+                </div>
+                <div class="col details" align="right">
+                    <button class="btn btn-outline-secondary option-btn" id="clear-body-btn">CLEAR BODY</button>
+                </div>
+            </div>
+            <p id="note-body">
+                {% if "/digitalbraindump/image/upload/" in note.body %}
+                <img src="{{ note.body}}" style="max-width: 100%"></img>
+                {% elif not note.body %}
+                <textarea type="text" name="body" id="text-body" style="height: 450px; width: 100%">(No Body)</textarea>
+                {% else %}
+                <textarea type="text" name="body" id="text-body" style="height: 450px; width: 100%">{{ note.body }}</textarea>
+                {% endif %}    
+            <p id="image-note-upload"></p>
+            <p align="right"><button class="btn btn-outline-secondary option-btn" id="image-note-btn">Upload Image as Note</button></p>
+            </p>
 
-        <p id="note-body">
-            Body<br/>
-            {% if "/digitalbraindump/image/upload/" in note.body %}
-                <img src="{{ note.body}}"></img>
-            {% elif not note.body %}
-            <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px">(No Body)</textarea>
-            {% else %}
-            <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px">{{ note.body }}</textarea>
-            {% endif %}    
-        </p>
+            {% if note.image %}
+            <h5 class="details">IMAGE ATTACHMENT</h5>
+            <img src="{{ note.image }}" style="max-width: 100%"></img>
+            {% endif %}
+        
+            <p id="image-attachment-upload"></p>
+            <p>
+                <button id="image-note-btn">Upload Image as Note</button>
+                <button id="image-attachment-btn">Attach Image to Note</button>
+            </p>
+            <p>
+                <input type="submit" value="Save">
+            </p>
+        </form>
+        <form action="/view-note/{{ note.note_id }}">
+            <input type="submit" value="Cancel">
+        </form>
+    </div>
+    <div class="col-1"></div>
+</div>
 
-        <p id="image-note-upload"></p>
-
-        {% if note.image %}
-        <p>Image Attachment</p>
-        <img src="{{ note.image }}"></img>
-        {% endif %}
-
-        <p id="image-attachment-upload"></p>
-        <p>
-            <button id="clear-body-btn">Clear Body of Note</button>
-            <button id="image-note-btn">Upload Image as Note</button>
-            <button id="image-attachment-btn">Attach Image to Note</button>
-        </p>
-        <p>
-            <input type="submit" value="Save">
-        </p>
-    </form>
-    <form action="/view-note/{{ note.note_id }}">
-        <input type="submit" value="Cancel">
-    </form>
 {% endblock %}
 
 {% block js %}
@@ -48,3 +61,41 @@
     <script src="/static/js/image_upload.js"></script>
     <script src="/static/js/clear_note_body.js"></script>
 {% endblock %}
+
+<form action="/save-note/{{ note.note_id }}" method="POST" enctype="multipart/form-data">
+    <p>
+        Title<br/>
+        <input type='text' name="title" value="{{ note.title }}">
+    </p>
+
+    <p id="note-body">
+        Body<br/>
+        {% if "/digitalbraindump/image/upload/" in note.body %}
+            <img src="{{ note.body}}"></img>
+        {% elif not note.body %}
+        <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px">(No Body)</textarea>
+        {% else %}
+        <textarea type="text" name="body" id="text-body" style="height: 450px; width: 450px">{{ note.body }}</textarea>
+        {% endif %}    
+    </p>
+
+    <p id="image-note-upload"></p>
+
+    {% if note.image %}
+    <p>Image Attachment</p>
+    <img src="{{ note.image }}"></img>
+    {% endif %}
+
+    <p id="image-attachment-upload"></p>
+    <p>
+        <button id="clear-body-btn">Clear Body of Note</button>
+        <button id="image-note-btn">Upload Image as Note</button>
+        <button id="image-attachment-btn">Attach Image to Note</button>
+    </p>
+    <p>
+        <input type="submit" value="Save">
+    </p>
+</form>
+<form action="/view-note/{{ note.note_id }}">
+    <input type="submit" value="Cancel">
+</form>
