@@ -98,7 +98,8 @@ table {
 
 /* For images within a note displayed on notes page */
 .img-page {
-    height: 100px;
+    max-width: 100%;
+    max-height: 100px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -182,11 +183,12 @@ button.cancel {
     color: rgb(254,249,239);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1000px) {
     #modal-content {
         width: 90%;
     }
 }
+
 
 /* Note details page */
 
@@ -197,6 +199,11 @@ button.cancel {
 
 .details button {
     width: 150px;
+}
+
+.details img {
+    max-width: 100%;
+    max-height: 400px;
 }
 
 #delete-button {
