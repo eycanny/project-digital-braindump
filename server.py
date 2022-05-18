@@ -280,9 +280,6 @@ def modify_note(note):
     if not new_body:
         new_body = "(No Body)"
 
-    if not new_body and "cloudinary" in note.body:
-        new_body = note.body
-
     images = upload_to_cloudinary()
 
     if (images["note_image"] != None) and (type(images["note_image"]) == str):
