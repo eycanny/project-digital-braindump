@@ -24,7 +24,7 @@
             <div id="note-body">
                 {% if "/digitalbraindump/image/upload/" in note.body %}
                 <p style="font-size: 12px">The URL was generated when you uploaded an image and is used as the source of the image.</p>
-                <textarea type="text" name="body" id="text-body" style="height: 450px; width: 100%">{{ note.body }}</textarea>
+                <textarea type="text" name="body" id="text-body" style="width: 100%" disabled>{{ note.body }}</textarea>
                 <img src="{{ note.body }}" style="max-width: 100%"></img>
                 {% elif not note.body %}
                 <textarea type="text" name="body" id="text-body" style="height: 450px; width: 100%">(No Body)</textarea>
