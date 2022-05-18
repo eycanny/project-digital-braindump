@@ -1,10 +1,10 @@
 'use strict';
 
-
-
+//Login and Account Creation
 const loginButton = document.querySelector('#login-btn');
 const createAccountButton = document.querySelector('#create-acct-btn');
 const accountBox = document.querySelector('#account-info-box');
+
 
 //Feature: Changes to a box for logging in upon clicking button
 loginButton.addEventListener('click', (evt) => {
@@ -59,4 +59,24 @@ createAccountButton.addEventListener('click', (evt) => {
     <button class="btn btn-outline-secondary option-btn" type="submit">CREATE</button>
   </form>`;
 
+})
+
+
+//About Digital Braindump
+const aboutButton = document.querySelector('#about-braindump-btn');
+const aboutContext = document.querySelector('#about-braindump');
+
+//Feature: Show user the app's About information
+aboutButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
+  aboutContext.innerHTML =
+    `<button class="btn btn-outline-secondary option-btn" type="button" id="about-braindump-btn">
+    What is Digital Braindump?<br/>
+    Click to learn!
+    </button><br/>
+    <br/>
+    <p>
+    Digital Braindump serves as a minimalist application to help you declutter your mind in the form of notes.
+    </p>`
 })
